@@ -8,17 +8,23 @@ For each reserved keyword there is a list of use cases
 and for each use case there is a concise explanation.
 The uses cases and explanations are mostly taken
 from the Scala language specification
-https://www.scala-lang.org/docu/files/ScalaReference.pdf
+[ScalaReference.pdf](https://www.scala-lang.org/docu/files/ScalaReference.pdf)
 
-Let's start!
+There are currently **39 reserved keywords in Scala** language:
 
-## Table of Contents
-{:.no_toc}
+| | | | | | |
+|-|-|-|-|-|-|
+| [abstract](#abstract) | [case](#case) | [catch](#catch) | [class](#class) | [def](#def) | [do](#do) |
+| [else](#else) | [extends](#extends) | [false](#false) | [final](#final) | [finally](#finally) | [for](#for) |
+| [forSome](#forSome) | [if](#if) | [implicit](#implicit) | [import](#import) | [lazy](#lazy) | [match](#match) |
+| [new](#new) | [null](#null) | [object](#object) | [override](#override) | [package](#package) | [private](#private) |
+| [protected](#protected) | [return](#return) | [sealed](#sealed) | [super](#super) | [this](#this) | [throw](#throw) |
+| [trait](#trait) | [try](#try) | [true](#true) | [type](#type) | [val](#val) | [var](#var) |
+| [while](#while) | [with](#with) | [yield](#yield) | | | | |
 
-* TOC
-{:toc}
+Let's explain them all!
 
-## The 39 Scala reserved keywords:
+## 39 Scala keywords explained:
 
 #### abstract
 
@@ -310,6 +316,6 @@ Let's start!
 * `for (x <- items) yield ...` defines a [for generator](#for).
   The generator produces a composite value (List, Array, etc...).
 
-## The 20 Scala reserved symbols:
+## Next: 20 Scala symbols explained `(_:_*)`
 
 coming soon...
