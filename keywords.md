@@ -15,7 +15,7 @@ Let's start!
 ## Table of Contents
 {:.no_toc}
 
-1. TOC
+* TOC
 {:toc}
 
 ## The 39 Scala reserved keywords:
