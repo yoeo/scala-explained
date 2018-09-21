@@ -2,7 +2,7 @@
 
 Literals are raw values that are written in a source code.
 
-1. TOC
+* TOC
 {:toc}
 
 ## Most used literals
