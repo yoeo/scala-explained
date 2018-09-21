@@ -139,7 +139,7 @@ println(raw"\new look")
 ### 6. Symbols
 
 A symbols is a kind-of string only used by the application logic,
-in opposition to actual `String`s that are used as application data.
+in opposition to actual `String` values that are used as application data.
 A symbol literal is represented by a word starting with a simple quote:
 `'connectionStarted`
 
