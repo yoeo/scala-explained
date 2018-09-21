@@ -6,9 +6,8 @@ Reserved keywords are words that have a special meaning in Scala.
 They cannot be used as an identifier (variable name or class name).
 For each reserved keyword there is a list of use cases
 and for each use case there is a concise explanation.
-The uses cases and explanations are mostly taken
-from the Scala language specification
-[ScalaReference.pdf](https://www.scala-lang.org/docu/files/ScalaReference.pdf)
+The uses cases and explanations are mostly taken from the
+[Scala language specification](https://www.scala-lang.org/files/archive/spec/2.12/)
 
 There are currently **39 reserved keywords in Scala** language:
 
