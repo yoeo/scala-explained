@@ -319,7 +319,3 @@ Let's explain them all!
 
 * `for (x <- items) yield ...` defines a [for generator](#for).
   The generator produces a composite value (List, Array, etc...).
-
-## Next: 20 Scala symbols explained `(_:_*)`
-
-coming soon...
