@@ -17,10 +17,10 @@ There are currently **20 reserved symbols in Scala** language:
 
 | | | | |
 |-|-|-|-|
-| [underscore `_`](#underscore-_) | [colon `:`](#colon-) | [equals sign `=`](#equals-sign-) | [rightward double arrow `=>` or `⇒`](#rightward-double-arrow-or-) |
-| [leftward arrow `<-` or `←`](#leftward-arrow-or-) | [less than percent `<%`](#less-than-percent-) | [less than colon `<:`](#less-than-colon-) | [more than colon `>:`](#more-than-colon-) |
-| [hashtag `#`](#hashtag-) | [at `@`](#at-) | [star `*`](#star-) | [parenthesis `(` and `)`](#parenthesis-and-) |
-| [brackets `[` and `]`](#brackets-and-) | [curly brackets `{` and `}`](#curly-brackets-and-) | [comment signs `//`, `/*` and `*/`](#comment-signs-and-) | [double quotes `"` and `"""`](#double-quotes-and-) |
+| [underscore `_`](#underscore-_) | [colon `:`](#colon-) | [equals sign `=`](#equals-sign-) | [rightward double arrow `=>`, `⇒`](#rightward-double-arrow-) |
+| [leftward arrow `<-`, `←`](#leftward-arrow-) | [less than percent `<%`](#less-than-percent-) | [less than colon `<:`](#less-than-colon-) | [more than colon `>:`](#more-than-colon-) |
+| [hashtag `#`](#hashtag-) | [at `@`](#at-) | [star `*`](#star-) | [parenthesis `( )`](#parenthesis-) |
+| [brackets `[ ]`](#brackets-) | [curly brackets `{ }`](#curly-brackets-) | [comment signs `//`, `/* */`](#comment-signs-) | [double quotes `"`, `"""`](#double-quotes-) |
 | [single quotes `'`](#single-quotes-) | [back quotes `` ` ``](#back-quotes-) | [comma `,`](#comma-) | [semicolon `;`](#semicolon-) |
 
 ## 20 Scala symbols explained:
@@ -84,7 +84,7 @@ There are currently **20 reserved symbols in Scala** language:
   It is the same with classes: `class ClassName(param: Type = 4) = ...`.
 * `type name = Type` defines an alias for a type.
 
-#### rightward double arrow `=>` or `⇒`
+#### rightward double arrow `=>`, `⇒`
 
 * `val x:(Type1, Type2) => ReturnType = ...` defines a function type.
 * `val x = (x: Type) => x + 3` defines a function.
@@ -95,7 +95,7 @@ There are currently **20 reserved symbols in Scala** language:
   into an other class using. Its called **self typing**.
 * `x match { case _: => 0 }` defines a pattern matching alternative.
 
-#### leftward arrow `<-` or `←`
+#### leftward arrow `<-`, `←`
 
 * `for (x <- itemList) { ... }`
   defines the for-comprehensions loop current item.
@@ -141,7 +141,7 @@ There are currently **20 reserved symbols in Scala** language:
 * `x match { case CaseClassName(a, _*) => a + 1 }"` extracts the specified
   parameters of a `case class` during pattern matching.
 
-#### parenthesis `(` and `)`
+#### parenthesis `( )`
 
 * `def methodName(param1: Type1, param2: Type2)...`
   defines a method with a list of parameters.
@@ -157,7 +157,7 @@ There are currently **20 reserved symbols in Scala** language:
 * `for (x <- items) ...` defines the loop enumerator.
 * `(x + 1) + 2` groups a block of expressions.
 
-#### brackets `[` and `]`
+#### brackets `[ ]`
 
 * `def methodName[TypeAlias](param: TypeAlias)...` defines a generic method.
   Other generic structures can also be defined using brackets.
@@ -167,7 +167,7 @@ There are currently **20 reserved symbols in Scala** language:
 * `private[this] val classMember = 3` defines an **object protected** member.
   `protected` values with special restrictions can also be defined this way.
 
-#### curly brackets `{` and `}`
+#### curly brackets `{ }`
 
 * `{ x + 1 }` defines a block of code.
 * `import packagename.{Name1, Name2 => NewName2, ...}`
@@ -181,7 +181,7 @@ There are currently **20 reserved symbols in Scala** language:
 * `type T = A forSome { type A }` defines an alias for an existential type.
   [Existential types should be avoided when possible.](https://github.com/scala/scala/blob/25d596e52a6b4bfea5ab2e62e98854e273c5abe4/src/library/scala/language.scala#L136)
 
-#### comment signs `//`, `/*` and `*/`
+#### comment signs `//`, `/* */`
 
 * `// inline comment` is an inline comment.
   ```scala
@@ -192,7 +192,7 @@ There are currently **20 reserved symbols in Scala** language:
   ```
   is a multi-lines comment.
 
-#### double quotes `"` and `"""`
+#### double quotes `"`, `"""`
 
 * `val x = "text"` defines a string value.
   The following code defines a multilines string value:
