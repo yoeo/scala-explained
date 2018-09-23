@@ -1,6 +1,6 @@
 # Scala keywords explained
 
-We will take a tour of **all Scala language reserved keywords and symbols**.
+We will take a tour of **all Scala language reserved keywords**.
 
 Reserved keywords are words that have a special meaning in Scala.
 They cannot be used as an identifier (variable name or class name).
