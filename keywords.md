@@ -1,4 +1,4 @@
-## Scala keywords & symbols explained
+# Scala keywords & symbols explained
 
 We will take a tour of **all Scala language reserved keywords and symbols**.
 
@@ -9,21 +9,21 @@ and for each use case there is a concise explanation.
 The uses cases and explanations are mostly taken from the
 [Scala language specification](https://www.scala-lang.org/files/archive/spec/2.12/)
 
-There are currently **39 reserved keywords in Scala** language:
+There are currently **40 reserved keywords in Scala** language:
 
 | | | | | | |
 |-|-|-|-|-|-|
 | [abstract](#abstract) | [case](#case) | [catch](#catch) | [class](#class) | [def](#def) | [do](#do) |
 | [else](#else) | [extends](#extends) | [false](#false) | [final](#final) | [finally](#finally) | [for](#for) |
-| [forSome](#forSome) | [if](#if) | [implicit](#implicit) | [import](#import) | [lazy](#lazy) | [match](#match) |
-| [new](#new) | [null](#null) | [object](#object) | [override](#override) | [package](#package) | [private](#private) |
-| [protected](#protected) | [return](#return) | [sealed](#sealed) | [super](#super) | [this](#this) | [throw](#throw) |
-| [trait](#trait) | [try](#try) | [true](#true) | [type](#type) | [val](#val) | [var](#var) |
-| [while](#while) | [with](#with) | [yield](#yield) | | | | |
+| [forSome](#forSome) | [if](#if) | [implicit](#implicit) | [import](#import) | [lazy](#lazy) | [macro](#macro) |
+| [match](#match) | [new](#new) | [null](#null) | [object](#object) | [override](#override) | [package](#package) |
+| [private](#private) | [protected](#protected) | [return](#return) | [sealed](#sealed) | [super](#super) | [this](#this) |
+| [throw](#throw) | [trait](#trait) | [try](#try) | [true](#true) | [type](#type) | [val](#val) |
+| [var](#var) | [while](#while) | [with](#with) | [yield](#yield) | | | |
 
 Let's explain them all!
 
-## 39 Scala keywords explained:
+## 40 Scala keywords explained:
 
 #### abstract
 
@@ -154,6 +154,11 @@ Let's explain them all!
 
 * `lazy val x = { ... }` defines a **lazy value**,
   a value that is evaluated only when it is used for the first time.
+
+#### macro
+
+* `def methodName: Unit = macro methodImplementation`
+  defines a Scala macro implementation method.
 
 #### match
 
