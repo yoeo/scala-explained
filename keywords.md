@@ -1,4 +1,4 @@
-# Scala keywords & symbols explained
+# Scala keywords explained
 
 We will take a tour of **all Scala language reserved keywords and symbols**.
 

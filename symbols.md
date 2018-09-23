@@ -1,4 +1,4 @@
-# Reserved symbols
+# Scala symbols explained
 
 Here we will explain **all Scala language reserved symbols**.
 
