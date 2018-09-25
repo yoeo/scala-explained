@@ -17,11 +17,11 @@ There are currently **20 reserved symbols in Scala** language:
 
 | | | | |
 |-|-|-|-|
-| [underscore `_`](#underscore-_) | [colon `:`](#colon-) | [equals sign `=`](#equals-sign-) | [rightward double arrow `=>`, `⇒`](#rightward-double-arrow-) |
-| [leftward arrow `<-`, `←`](#leftward-arrow-) | [less than percent `<%`](#less-than-percent-) | [less than colon `<:`](#less-than-colon-) | [more than colon `>:`](#more-than-colon-) |
-| [hashtag `#`](#hashtag-) | [at `@`](#at-) | [star `*`](#star-) | [parenthesis `( )`](#parenthesis-) |
-| [brackets `[ ]`](#brackets-) | [curly brackets `{ }`](#curly-brackets-) | [comment signs `//`, `/* */`](#comment-signs-) | [double quotes `"`, `"""`](#double-quotes-) |
-| [single quotes `'`](#single-quotes-) | [back quotes `` ` ``](#back-quotes-) | [comma `,`](#comma-) | [semicolon `;`](#semicolon-) |
+| [`_`](#underscore-_) | [`:`](#colon-) | [`=`](#equals-sign-) | [`=>`, `⇒`](#rightward-double-arrow-) |
+| [`<-`, `←`](#leftward-arrow-) | [`<%`](#less-than-percent-) | [`<:`](#less-than-colon-) | [`>:`](#more-than-colon-) |
+| [`#`](#hashtag-) | [`@`](#at-) | [`*`](#star-) | [`( )`](#parenthesis-) |
+| [`[ ]`](#brackets-) | [`{ }`](#curly-brackets-) | [`//`, `/* */`](#comment-signs-) | [`"`, `"""`](#double-quotes-) |
+| [`'`](#single-quotes-) | [`` ` ``](#back-quotes-) | [`,`](#comma-) | [`;`](#semicolon-) |
 
 ## 20 Scala symbols explained:
 
