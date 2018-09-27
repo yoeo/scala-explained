@@ -53,6 +53,9 @@ Let's explain them all!
   1. can be compared with each other instances `a == b`,
   1. produces a readable message when printed.
 * `case object ObjectName { ... }` defines an object that can be serialized.
+* `def x: Type1 => Type2 = { case x => ... }`
+  defines a method that is bound an anonymous method.
+  This anonymous method processes its parameter using pattern matching.
 
 #### catch
 
