@@ -5,9 +5,7 @@ Literals are raw values that are written in a source code.
 * TOC
 {:toc}
 
-## Most used literals
-
-### 1. Integer literals
+## Integer literals
 
 There are two representations of integer literals in Scala,
 * the decimal representation: `0`, `3615`, `-99`, etc...
@@ -29,7 +27,7 @@ println(s"the sum is: ${ sum }")
 // --> the sum is: 0
 ```
 
-### 2. Floating point literals (for real numbers)
+## Floating point literals (for real numbers)
 
 Real number are [approximately represented by floating point numbers](https://en.wikipedia.org/wiki/Floating-point_arithmetic).
 
@@ -52,7 +50,7 @@ println(s"the percentage is ${ 100 * onePercent }%")
 // --> the percentage is 1.0%
 ```
 
-### 3. Boolean
+## Boolean
 
 There are two Boolean literals: `true` and `false`
 
@@ -63,7 +61,7 @@ println(s"that's OK? ${ isOK != isKO }")
 // --> that's OK? true
 ```
 
-### 4. Character
+## Character
 
 In Scala character literals are written in simple quotes `'`,
 and there are two way to represent a character literal:
@@ -77,9 +75,9 @@ println(s"go to the ${ asciiTCharacter }op $unicodeTopArrow")
 // --> go to the top ↑
 ```
 
-### 5. Strings
+## Strings
 
-#### Single & multi line strings
+### Single & multi line strings
 
 String literals are written using single double quotes or triple double quotes.
 * Single line string are written with single double quotes: `"hello"`.
@@ -113,7 +111,7 @@ println(textPart1 + textPart2)
 // --> Plane
 ```
 
-#### String interpolation
+### String interpolation
 
 String literals can be represented with an interpolation indicator:
 * `s"${variableName}"`: replaces the variable name by its value.
@@ -134,9 +132,7 @@ println(raw"\new look")
 // --> \new look
 ```
 
-## Other literals
-
-### 6. Symbols
+## Symbols
 
 A symbols is a kind-of string only used by the application logic,
 in opposition to actual `String` values that are used as application data.
@@ -151,7 +147,7 @@ println(s"the status code is $status")
 // --> the status code is 0
 ```
 
-### 7. Bonus: XML literals
+## Bonus: XML literals
 
 An XML literal represents an XML content that is written inline,
 in the source code:
