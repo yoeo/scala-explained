@@ -1,5 +1,8 @@
 # Scala library explained
 
+* TOC
+{:toc}
+
 ### Classes hierarchy
 
 Scala is primarily a object language, all the values are objects.
@@ -245,25 +248,25 @@ String values supports the following operations:
   // Check if a text matches a regular expression
   val phoneNumber = "+226 43 00 00 00"
   val isAPhoneNumber = phoneNumber.matches(raw"[\s\d\-\+]+")
-  println(s"the text ${ if (isAPhoneNumber) "is" else "isn't" } a phone number.")
+  println(s"the text ${ if (isAPhoneNumber) "is" else "is not" } a phone number.")
   // --> the text is a phone number.
 
   // Check if a text contains a given string
   val cookingRecipe = "Mélangez bien le bouillon."
   val isInFrench = cookingRecipe.contains("é")
-  println(s"the text ${ if (isInFrench) "is" else "isn't" } in French.")
+  println(s"the text ${ if (isInFrench) "is" else "is not" } in French.")
   // --> the text is in French.
 
   // Check if a text starts with a given string
   val story = "Once upon a time, a rabbit and a turtle where arguing."
   val isATale = story.startsWith("Once upon a time")
-  println(s"the text ${ if (isATale) "is" else "isn't" } a tale.")
+  println(s"the text ${ if (isATale) "is" else "is not" } a tale.")
   // --> the text is a tale.
 
   // Check if a text ends with a given string
   val shortText = "WAR FINALLY OVER STOP"
   val isATelegram = shortText.endsWith("STOP")
-  println(s"the text ${ if (isATelegram) "is" else "isn't" } a telegram.")
+  println(s"the text ${ if (isATelegram) "is" else "is not" } a telegram.")
   // --> the text is a telegram.
   ```
 
