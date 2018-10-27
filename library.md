@@ -342,11 +342,11 @@ The concepts behind each collection type are described in
 Here are some convenient collection types that can be used in Scala programs:
 > `String` type is equivalent to a sequential collection.
 
-#### Sequence of elements: `List`
+### Sequence of elements: `List`
 
 Scala `List` is an immutable sequence of elements.
 
-##### Combine `List` elements
+#### Combine `List` elements
 
 * Merge or exclude `List` elements:
 
@@ -444,7 +444,7 @@ Scala `List` is an immutable sequence of elements.
   // --> 9 root squares: 3, -3
   ```
 
-##### Access `List` elements
+#### Access `List` elements
 
 * Get an element:
 
@@ -544,7 +544,7 @@ Scala `List` is an immutable sequence of elements.
   // --> here we have 8 items
   ```
 
-##### Filter/search `List` items
+#### Filter/search `List` items
 
 * Look for a values:
 
@@ -616,7 +616,7 @@ Scala `List` is an immutable sequence of elements.
   // --> all items are < 10 ? true
   ```
 
-##### Map-reduce `List` items
+#### Map-reduce `List` items
 
 * Iterate over a `List`:
 
@@ -692,11 +692,11 @@ Scala `List` is an immutable sequence of elements.
   */
   ```
 
-#### Key-value association: `Map`
+### Key-value association: `Map`
 
 Scala `Map` are collections that hold pairs of key-value.
 
-##### Combine `Map` elements
+#### Combine `Map` elements
 
 * Combine a `Map` with a pair or with an other `Map`:
 
@@ -714,7 +714,7 @@ Scala `Map` are collections that hold pairs of key-value.
   // --> a -> 1, b -> 2, c -> 3
   ```
 
-##### Access `Map` elements
+#### Access `Map` elements
 
 * Retrieve a value from a `Map`:
 
@@ -781,7 +781,7 @@ Scala `Map` are collections that hold pairs of key-value.
   */
   ```
 
-##### Remove `Map` elements
+#### Remove `Map` elements
 
 * Remove elements from a `Map` using their keys:
 
@@ -809,7 +809,7 @@ Scala `Map` are collections that hold pairs of key-value.
   */
   ```
 
-##### Filter/search `Map` items
+#### Filter/search `Map` items
 
 * Check if a key is in the `Map`:
 
@@ -853,7 +853,7 @@ Scala `Map` are collections that hold pairs of key-value.
   */
   ```
 
-##### Map-reduce `Map` items
+#### Map-reduce `Map` items
 
 * Transform each pair contained in the `Map`:
 
