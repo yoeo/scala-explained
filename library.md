@@ -3,7 +3,7 @@
 * TOC
 {:toc}
 
-### Classes hierarchy
+## Classes hierarchy
 
 Scala is primarily a object language, all the values are objects.
 Different classes of objects are defined in
@@ -28,7 +28,7 @@ based on the following class hierarchy:
 Values of a given type can be transformed into an equivalent values
 of an other type, both implicitly or explicitly.
 
-### Implicit cast
+#### Implicit cast
 
 Scala can cast a variable from a type to an other type using several hints,
 like the destination variable type.
@@ -45,7 +45,7 @@ an other number type:
 
 ![cast](https://docs.scala-lang.org/resources/images/tour/type-casting-diagram.svg)
 
-### Explicit cast
+#### Explicit cast
 
 An explicit cast is done by calling a cast method to produce
 an equivalent value with the desired type.
@@ -67,7 +67,7 @@ In most programming languages the primary values are
 These value types are defined in Scala standard library
 and here is how you can use them:
 
-#### True / False values: `Boolean`
+### True / False values: `Boolean`
 
 Boolean values are either `true` or `false`.
 They are the result of comparison operations, for example `a > b`.
@@ -101,7 +101,7 @@ println(s"the plane will ${ if (thePlaneWillLand) "land" else "crash" }!")
 // --> the plane will land!
 ```
 
-#### Numbers: `Byte`, `Char`, `Short`, `Int`, `Long`, `Float`, `Double`
+### Numbers: `Byte`, `Char`, `Short`, `Int`, `Long`, `Float`, `Double`
 
 Different number types are defined for different usages:
 * `Byte`, 8-bit signed integer that represents a **data byte**.
@@ -163,7 +163,7 @@ println(s"number filtered to only keep the 4 lowest bits = $lowBits")
 // --> number filtered to only keep the 4 lowest bits = 3
 ```
 
-#### Text values: `String`
+### Text values: `String`
 
 Scala `String` are based on Java `String`.
 
@@ -179,7 +179,7 @@ String values supports the following operations:
   * `<=` lower than or equal
   * `>=` greater than or equal
 
-##### Useful `String` methods
+#### Useful `String` methods
 
 * Extracting data from a `String`:
 
@@ -270,7 +270,7 @@ String values supports the following operations:
   // --> the text is a telegram.
   ```
 
-##### `String` Interpolation and formatting
+#### `String` Interpolation and formatting
 
 Values can be added to a `String` template using formatting and interpolation:
 
