@@ -1,8 +1,63 @@
 # Scala explained
 
-Explaining with simple examples everything I know about Scala language
+Scala is a programming language that let you write **cool stuff** like:
 
-1. [Scala literals explained](literals.md)
-1. [Scala keywords explained](keywords.md)
-1. [Scala symbols explained](symbols.md)
-1. [Scala library explained](library.md)
+```scala
+def sing(i: Int) = s"Happy Birthday ${ if (i == 3) "dear Tom" else "to You" }"
+(1 to 4).map(sing).foreach(println)
+
+/* --> Prints:
+
+Happy Birthday to You
+Happy Birthday to You
+Happy Birthday dear Tom
+Happy Birthday to You
+
+*/
+```
+
+This website **explains Scala features** that will help you master
+Scala programming.
+Each explanation is illustrated by a **code snippet**
+that can be **copy-pasted** into a Scala interpreter.
+
+Talking about Scala interpreter, here's how you can set it up:
+
+## Setup Scala environment
+
+1. **Install Scala** from the official website:
+  https://www.scala-lang.org/download/
+
+1. Create a **Scala source code file** named `MyScalaProgram.scala`
+  with the following content:
+
+  ```scala
+  object MyScalaProgram {
+    // The `main` method is the program entry point
+    def main(args: Array[String]): Unit =
+      println("I was here.")
+  }
+  ```
+
+1. Compile and run your **Scala program** using your favorite Scala environment
+  (IntelliJ, sbt) or through a terminal:
+
+  ```bash
+  scala MyScalaProgram.scala
+  # --> I was here.
+  ```
+
+## Let's start now
+
+First of all, we will talk about [Scala basic syntax](syntax).
+
+If you are already familiar with Scala, you can learn more about
+[Scala cool functional programming (FP) features here](functions).
+
+If you want to build beautiful software architectures,
+you can take a look at [Scala mind blowing object concepts](classes).
+
+For the most curious among you, there is also an exhaustive list of
+Scala [keywords](keywords) and [symbols](symbols) with plenty of examples.
+
+Enjoy.
