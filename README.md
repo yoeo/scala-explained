@@ -26,7 +26,7 @@ Talking about Scala interpreter, here's how you can set it up:
 ## Setup Scala environment
 
 1. **Install Scala** from the official website:
-  https://www.scala-lang.org/download/
+  [https://www.scala-lang.org/download/](https://www.scala-lang.org/download/)
 
 1. Create a **Scala source code file** named `MyScalaProgram.scala`
   with the following content:
