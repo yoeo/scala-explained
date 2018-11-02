@@ -5,7 +5,6 @@ Scala is a programming language that let you write **cool stuff** like:
 ```scala
 def sing(i: Int) = s"Happy Birthday ${ if (i == 3) "dear Tom" else "to You" }"
 (1 to 4).map(sing).foreach(println)
-
 /* -->
 Happy Birthday to You
 Happy Birthday to You
@@ -47,16 +46,15 @@ Talking about Scala interpreter, here's how you can set it up:
 
 ## Let's start now
 
-First of all, we will talk about [Scala basic syntax](syntax.md).
+First of all, we will talk about [Scala basic syntax](syntax).
 
 If you are already familiar with Scala, you can learn more about
-[Scala cool functional programming (FP) features here](functions.md).
+[Scala cool functional programming (FP) features here](functions).
 
 If you want to build beautiful software architectures,
-you can take a look at [Scala mind blowing object concepts](classes.md).
+you can take a look at [Scala mind blowing object concepts](classes).
 
 For the most curious among you, there is also an exhaustive list of
-Scala [keywords](keywords.md) and [symbols](symbols.md)
-with plenty of examples.
+Scala [keywords](keywords) and [symbols](symbols) with plenty of examples.
 
 Enjoy.
