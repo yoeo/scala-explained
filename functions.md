@@ -3,6 +3,7 @@
 A function is a block of code that can be called.
 Scala support a wide range of function related features including
 **anonymous** functions, **higher order** functions, **currying**, etc...
+
 That is why Scala is a great language for **functional programming**.
 
 * TOC
