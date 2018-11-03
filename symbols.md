@@ -178,6 +178,8 @@ There are currently **20 reserved symbols in Scala** language:
 * `for { x <- items } ...` defines the loop enumerator.
 * `try ... catch { case ... }` handles a run time error in the `catch` block.
 * `package name { ... }` defines a package.
+* `val x = new TraitName { ... }` extends a trait (or a class)
+  then instantiates the resulting anonymous class.
 * `type T = A forSome { type A }` defines an alias for an existential type.
   [Existential types should be avoided when possible.](https://github.com/scala/scala/blob/25d596e52a6b4bfea5ab2e62e98854e273c5abe4/src/library/scala/language.scala#L136)
 

@@ -314,7 +314,7 @@ Let's explain them all!
 * `class ClassName extends Base1 with Trait1 with Trait2`
   creates a [class](#class) that inherits from multiple classes
   and [traits](#trait).
-* `val x = new (ClassName with Trait1 with Trait2)` creates an instance
+* `val x = new ClassName with Trait1 with Trait2` creates an instance
   by combining multiple types ([class](#class) & [traits](#trait))
   to generate a new type.
 
