@@ -5,7 +5,7 @@ Classes are templates for new objects.
 * TOC
 {:toc}
 
-## Scala class-like structure
+## Available structures
 
 In Scala language there are several structures that are related to classes.
 The structures are **classes**, **traits**, **abstract classes**,
@@ -13,7 +13,7 @@ The structures are **classes**, **traits**, **abstract classes**,
 
 The following table show the main features of each class-like structures:
 
- | init params | instantiable | extensible
+ * | init params | instantiable | extensible
 --------------------------------- | - | - | -
 [class](#class)                   | ✔ | ✔ | ✔
 [trait](#trait)                   | ✘ | ✘ | ✔
