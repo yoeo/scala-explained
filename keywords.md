@@ -48,7 +48,7 @@ Let's explain them all!
   The "if condition" can be use here too.
 * `case class ClassName(param: Type, ...)` defines a [case class](#class).
   It is a class made to hold data.
-  Case class instances has the following features:
+  Case class instances have the following features:
   1. supports pattern matching,
   1. can be compared with each other instances `a == b`,
   1. produces a readable message when printed.
