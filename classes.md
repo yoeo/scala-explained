@@ -1058,23 +1058,23 @@ if `TypeY < TypeX` then `(TypeY with TypeZ) < (TypeX with TypeZ)`
 
 * **compound type** example:
 
-```scala
-// Create a range object.
+  ```scala
+  // Create a range object.
 
-trait RangeStart {
-  def start: Int = 0
-}
+  trait RangeStart {
+    def start: Int = 0
+  }
 
-trait RangeEnd {
-  def end: Int = 10
-}
+  trait RangeEnd {
+    def end: Int = 10
+  }
 
-// object created by combining two traits
-val range = new RangeStart with RangeEnd
+  // object created by combining two traits
+  val range = new RangeStart with RangeEnd
 
-println(s"from ${ range.start } to ${ range.end }")
-// --> from 0 to 10
-```
+  println(s"from ${ range.start } to ${ range.end }")
+  // --> from 0 to 10
+  ```
 
 * **compound type** with subtyping:
 
@@ -1540,73 +1540,73 @@ from the place where they are implicitly used.
 
 * Implicitly **inject arguments** into a function:
 
-```scala
-// Plan a trip.
+  ```scala
+  // Plan a trip.
 
-object Travel {
-  // a method that takes an implicit value `to`
-  def details[A](from: A)(implicit to: A): String = s"travel from $from to $to"
-}
+  object Travel {
+    // a method that takes an implicit value `to`
+    def details[A](from: A)(implicit to: A): String = s"travel from $from to $to"
+  }
 
-// implicit values
-implicit val toName: String = "Helsinki"
-implicit val toCode: Int = 666
+  // implicit values
+  implicit val toName: String = "Helsinki"
+  implicit val toCode: Int = 666
 
-// the value `toName` is implicitly added to `details` parameters list
-// because `A` type variable is inferred to `String` and
-// `toName` matches the implicit parameter definition `to: A` & `A = String`
-val planning = Travel.details("Toronto")
+  // the value `toName` is implicitly added to `details` parameters list
+  // because `A` type variable is inferred to `String` and
+  // `toName` matches the implicit parameter definition `to: A` & `A = String`
+  val planning = Travel.details("Toronto")
 
-println(planning)
-// --> travel from Toronto to Helsinki
+  println(planning)
+  // --> travel from Toronto to Helsinki
 
-// the value `toCode` is implicitly added to `details` parameters list
-// because `A` type variable is inferred to `Int` and now
-// `toCode` matches the implicit parameter definition `to: A` & `A = Int`
-val planningWithCityCodes = Travel.details(6)
+  // the value `toCode` is implicitly added to `details` parameters list
+  // because `A` type variable is inferred to `Int` and now
+  // `toCode` matches the implicit parameter definition `to: A` & `A = Int`
+  val planningWithCityCodes = Travel.details(6)
 
-println(planningWithCityCodes)
-// --> travel from 6 to 666
-```
+  println(planningWithCityCodes)
+  // --> travel from 6 to 666
+  ```
 
 * Implicitly **inject a function** into an other function arguments list:
 
-```scala
-// Compute the median value.
+  ```scala
+  // Compute the median value.
 
-// a function that implicitly take a parameter `strategy` and
-// `strategy` is also a function
-def median[A](items: List[A])(implicit strategy: List[A] => A): A =
-  strategy(items)
+  // a function that implicitly take a parameter `strategy` and
+  // `strategy` is also a function
+  def median[A](items: List[A])(implicit strategy: List[A] => A): A =
+    strategy(items)
 
-// an implicit candidate for `A = Int`
-implicit val numberMean = (items: List[Int]) => {
-  val index = (items.length / 2).toInt
-  items.sorted.apply(index)
-}
+  // an implicit candidate for `A = Int`
+  implicit val numberMean = (items: List[Int]) => {
+    val index = (items.length / 2).toInt
+    items.sorted.apply(index)
+  }
 
-// an implicit candidate for `A = String`
-implicit val textMean = (items: List[String]) => {
-  val index = (items.length / 2).toInt
-  items.sortBy(_.length).apply(index)
-}
+  // an implicit candidate for `A = String`
+  implicit val textMean = (items: List[String]) => {
+    val index = (items.length / 2).toInt
+    items.sortBy(_.length).apply(index)
+  }
 
-val cities = List("Gao", "Tamanrasset", "Antananarivo", "Koupela", "Lome")
+  val cities = List("Gao", "Tamanrasset", "Antananarivo", "Koupela", "Lome")
 
-// implicitly adds the argument `textMean` because here `A = String`
-val medianCity = median(cities)
+  // implicitly adds the argument `textMean` because here `A = String`
+  val medianCity = median(cities)
 
-println(s"please visit $medianCity")
-// --> please visit Koupela
+  println(s"please visit $medianCity")
+  // --> please visit Koupela
 
-val temperatures = List(30, 27, 45, 26, 18)
+  val temperatures = List(30, 27, 45, 26, 18)
 
-// implicitly adds the argument `numberMean` because here `A = Int`
-val medianTemperature = median(temperatures)
+  // implicitly adds the argument `numberMean` because here `A = Int`
+  val medianTemperature = median(temperatures)
 
-println(s"it's $medianTemperature degrees there")
-// --> it's 27 degrees there
-```
+  println(s"it's $medianTemperature degrees there")
+  // --> it's 27 degrees there
+  ```
 
 ## Operators overload
 
