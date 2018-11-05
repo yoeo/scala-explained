@@ -199,7 +199,7 @@ println(s"New high score is $actualHighScore")
 // --> New high score is 13
 ```
 
-### Define multiple class constructors
+### Define multiple class constructors: `this`
 
 Classes has a member named `this` that is bound to the current object.
 `this` member is also used to define constructors:
