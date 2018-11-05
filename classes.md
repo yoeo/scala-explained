@@ -510,7 +510,7 @@ println(wall.fullSpecs(16))
 // --> Wall made with 16 4K monitor
 ```
 
-### Stackable trait pattern
+### Stackable trait pattern: `abstract override`
 
 Stackable trait pattern is a programming pattern where a functionality
 is split into multiple components (traits) then assembled by extending a class.
@@ -553,32 +553,7 @@ database.store(5, "prices")
 // --> stored 5 in sql://prices
 ```
 
-### Instantiate combined traits
-
-Instances can be created by **combining multiple traits** and classes
-to create a type on the fly. This is done using `with` statement.
-
-Example:
-
-```scala
-// Create a range object.
-
-trait RangeStart {
-  def start: Int = 0
-}
-
-trait RangeEnd {
-  def end: Int = 10
-}
-
-// object created by combining two traits
-val range = new RangeStart with RangeEnd
-
-println(s"from ${ range.start } to ${ range.end }")
-// --> from 0 to 10
-```
-
-### Instantiate a trait using an anonymous class
+### Instantiate a trait using an anonymous class `new Trait { ... }`
 
 An instance can be created from a trait by **fully defining all its member**.
 To define these members you can create an anonymous class
@@ -1072,12 +1047,36 @@ The enclosing class is called **outer class**.
 A **compound type** is a type created by the composition of multiple types:
 `TypeA with TypeB with TypeC with...`
 
+A compound type can be **instantiated** even if its components are
+[traits](#trait) and [abstract classes](#abstract-class) as long as
+they are fully defined.
+
 The **compound type** reproduces the subtyping relations of
 the component classes. In other words:
 
-if `TypeY < TypeX` then `TypeY with TypeZ < TypeX with TypeZ`
+if `TypeY < TypeX` then `(TypeY with TypeZ) < (TypeX with TypeZ)`
 
 * **compound type** example:
+
+```scala
+// Create a range object.
+
+trait RangeStart {
+  def start: Int = 0
+}
+
+trait RangeEnd {
+  def end: Int = 10
+}
+
+// object created by combining two traits
+val range = new RangeStart with RangeEnd
+
+println(s"from ${ range.start } to ${ range.end }")
+// --> from 0 to 10
+```
+
+* **compound type** with subtyping:
 
   ```scala
   // Run a factory.
