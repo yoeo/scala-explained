@@ -13,7 +13,7 @@ The structures are **classes**, **traits**, **abstract classes**,
 
 The following table show the main features of each class-like structures:
 
- * | init params | instantiable | extensible
+| | init params | instantiable | extensible |
 --------------------------------- | - | - | -
 [class](#class)                   | ✔ | ✔ | ✔
 [trait](#trait)                   | ✘ | ✘ | ✔
