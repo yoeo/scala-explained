@@ -659,7 +659,7 @@ A `case class` is a [class](#class) created primary to store data.
   // --> really hot weather
   ```
 
-### Copy and modify a `case class` instance
+### Copy and modify an instance: `copy`
 
 Case `case class` instances have a built-in method `copy` that
 creates a **copy of the instance**.
@@ -681,7 +681,7 @@ println(s"this ${ expensiveMango.name } costs ${ expensiveMango.price } €")
 // --> this mango costs 10.0 €
 ```
 
-### Extract `case class` instance parameters
+### Extract instance parameters
 
 `case class` allows the extraction of instance parameters:
 
@@ -697,7 +697,7 @@ println(s"Going to a $stars stars $place.")
 // --> Going to a 5 stars heavenly beach.
 ```
 
-### Other `case class` features
+### Other features: `productPrefix`, `productIterator`, etc...
 
 `case class` instances expose the following methods:
 
@@ -796,7 +796,7 @@ object SuperFastSoftware {
 // --> Already completed!
 ```
 
-### Importing `object` members
+### Importing object members
 
 An `object` **member can be imported** in an other file
 or an other execution context using the following syntax:
@@ -838,7 +838,7 @@ object Main {
 // --> Working!
 ```
 
-### Companion `object` and companion `class`
+### Companion object and companion class
 
 A **companion `object`** and a **companion `class`** are created when
 a [class](#class) and an `object` share the same name.
@@ -904,7 +904,7 @@ of the class.
   // --> Please enter customer 2
   ```
 
-### Extractor `object`: `apply` and `unapply`
+### Extractor object: `apply` and `unapply`
 
 With the extractor `object` feature it is possible to **call an `object`**
 and **extract values from an `object`**:
@@ -964,7 +964,7 @@ This mechanism is used with pattern matching.
   // --> recovered message: orange
   ```
 
-### Object protected members
+### Object protected members: `private[this]`, `protected[this]`
 
 The `private[this]` modifier is used to create an object members
 that is only visible inside the object and cannot be used by a companion class:
@@ -999,7 +999,11 @@ println(s"the secret key is $secretKey")
 > in the current class and its derived classes.
 > The companion object cannot access it.
 
-## Outer and inner classes
+## Combined classes
+
+There are several ways to combine classes.
+
+### Outer and inner classes: `instance.Inner` and `Outer#Inner`
 
 An **inner class** is a [class](#class) defined inside other classes.
 The enclosing class is called **outer class**.
@@ -1063,7 +1067,7 @@ The enclosing class is called **outer class**.
   // --> sent: keep-alive
   ```
 
-## Compound types
+### Compound types: `TypeA with TypeB`
 
 A **compound type** is a type created by the composition of multiple types:
 `TypeA with TypeB with TypeC with...`
@@ -1110,7 +1114,7 @@ if `TypeY < TypeX` then `TypeY with TypeZ < TypeX with TypeZ`
   // --> This is very clean.
   ```
 
-## Self-type mix-in
+### Self-type mix-in: `this: TypeA =>`
 
 **self-type mix-in** is a syntax used to inject the members of a class
 into an other class.
@@ -1204,7 +1208,7 @@ is replaced by an actual type.
   // --> Yes!
   ```
 
-### Type variance: invariant, covariant and contravariant
+### Type variance: invariant, covariant and contravariant: `T`, `+T` and `-T`
 
 Let's take two types `Parent` and `Child` that have a subtyping relation
 `Child < Parent` and a generic class `Generic[T]`.
@@ -1275,7 +1279,7 @@ by adding `-` symbol to its name, ex: `-T`.
   // --> tree type is: text-tree
   ```
 
-### Type upper and lower bounds
+### Type upper and lower bounds: `T <: Upper` and `T >: Lower`
 
 Optional **upper** and **lower bounds** define which types can be applied
 to the generic class.
@@ -1407,7 +1411,7 @@ println(s"result: ${ result.data }")
 // --> result: epsilon
 ```
 
-### View bounds (deprecated)
+### View bounds (deprecated): `T <% View[T]`
 
 View bounds use [implicit conversion](#implicit-conversion) to convert types.
 [This feature is deprecated](https://github.com/scala/scala/pull/2909).
@@ -1482,7 +1486,7 @@ println(s"datagram content: $content")
 // --> datagram content: |header=0a|payload=05be|
 ```
 
-### Existential types (to avoid)
+### Existential types (to avoid): `T forSome { type T }`
 
 Existential types are some kind of [generic types](#generic-types)
 that matches any type.
