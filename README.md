@@ -13,12 +13,13 @@ Happy Birthday to You
 */
 ```
 
-This website **explains Scala features** that will help you master
+This website **explains Scala features** that will help you understand
 Scala programming.
 Each explanation is illustrated by a **code snippet**
 that can be **copy-pasted** into a Scala interpreter.
 
-Talking about Scala interpreter, here's how you can set it up:
+Talking about a Scala interpreter, here's how you can set up
+Scala programming tools:
 
 ## Setup Scala environment
 
@@ -30,7 +31,7 @@ Talking about Scala interpreter, here's how you can set it up:
 
   ```scala
   object MyScalaProgram {
-    // The `main` method is the program entry point
+    // the `main` method is the program entry point
     def main(args: Array[String]): Unit =
       println("I was here.")
   }
@@ -44,7 +45,7 @@ Talking about Scala interpreter, here's how you can set it up:
   # --> I was here.
   ```
 
-## Let's start now
+## Start!
 
 First of all, we will talk about [Scala basic syntax](syntax).
 

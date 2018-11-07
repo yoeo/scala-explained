@@ -1,11 +1,11 @@
 # General syntax
 
 This section explains Scala language basic structures like:
-variables, **blocks**, loops, **pattern matching**, exceptions handling,
-**lazy values**, etc...
+**values**, *variables*, *blocks*, *loops*, **pattern matching**,
+*exceptions handling*, **lazy values**, etc...
 
 Scala [functions](functions) and [classes](classes)
-are explained in their own pages.
+are explained in their own sections.
 
 * TOC
 {:toc}
@@ -13,7 +13,7 @@ are explained in their own pages.
 
 ## Comments
 
-A comment is a block of text that won't be executed:
+A comment is a block of text that is **not executed**:
 
 ```scala
 // inline comment
@@ -29,10 +29,12 @@ comment */
 
 ## Values & variables
 
-* A **value** is a placeholder where an object is stored.
-  Values are constants, their content cannot change:
+* A **value** is a named object. Values are constants,
+  which mean that no other object can be assigned to an already existing value:
 
   ```scala
+  // Display a value.
+
   // create a value (constant)
   val x = 49 + 0.3
 
@@ -40,36 +42,43 @@ comment */
   // --> 49.3
   ```
 
-* A **variable** are values whose content can change:
+* A **variable** is a value that can be reassigned:
 
   ```scala
-  // create and increment a variable
+  // Create and increment a variable.
+
+  // create a variable
   var z = 13
+  // update the variable content
   z += 7
 
   println(z)
   // --> 20
   ```
 
-> * Variable and values must always be **initialized**.
-> * Moreover **values** should be preferred over variables.
+> * Variable and values should **always be initialized**,
+>   unless they are defined in an [abstract class](classes#abstract-class)
+>   or a [trait](classes#trait).
+> * Moreover [values should be preferred to variables](https://twitter.com/odersky/status/58200881082011648).
 
 ### Explicit and implicit typing
 
-Value and variable types can be omitted most of the time because
-Scala can deduce (infer) them. This mechanism is called **type inference**:
+Value and variable **types can be omitted** most of the time because
+Scala can infer them. This mechanism is called **type inference**:
 
 ```scala
-// the value's type `String` is explicit set
+// Define values with and without explicit types.
+
+// the value's type `String` is explicitly set
 val name: String = "Hanna"
 
-// the value's type `String` is inferred from the content type
+// the value's type `String` is inferred from the content's type
 val nickname = "Nana"
 ```
 
-> * It is recommended to explicitly write the type
-    **when the lack of type hurts the usability** of a the code.
-    Example: a library public API.
+> It is recommended to explicitly write the type
+  **when the lack of type hurts the usability** of a the code.
+  Example: a library public API.
 
 ## Statements and blocks
 
@@ -85,6 +94,8 @@ val nickname = "Nana"
 * A **block** is composed by multiple statements surrounded by `{ ... }`:
 
   ```scala
+  // Compute and display a value.
+
   // `k` value is computed in a block
   val k = {
     val x = 3
@@ -96,11 +107,13 @@ val nickname = "Nana"
   // --> 10
   ```
 
-## `if`-`else` conditional block
+## `if-else` conditional block
 
-A conditional execution statement is written using a `if`-`else` block:
+A conditional execution statement is written using a `if-else` block:
 
 ```scala
+// Check if math still works...
+
 val x =
   if (2 > 1)
     "math works"
@@ -111,7 +124,7 @@ println(x)
 // --> math works
 ```
 
-## `while` and `do`-`while` loops
+## `while` and `do-while` loops
 
 Both loops run a statement while a condition is satisfied.
 
@@ -130,7 +143,7 @@ Both loops run a statement while a condition is satisfied.
   // --> 9
   ```
 
-* `do`-`while` loop:
+* `do-while` loop:
 
   ```scala
   // Find the first power of 2 that is bigger than 100.
@@ -144,9 +157,9 @@ Both loops run a statement while a condition is satisfied.
   // --> 128
   ```
 
-> * Most of the time,
->   **collection methods**: `map`, `flatMap`, `foreach`, etc...
->   can be used instead of loops.
+> Most of the time,
+> **collection methods**: `map`, `flatMap`, `foreach`, etc...
+> can be used instead of loops.
 
 ## `for` comprehensions
 
@@ -161,10 +174,12 @@ You can use `for` comprehensions to iterate other one or multiple collections.
   val maxScore = 128
 
   val scorePercentages =
-    for (score <- scores) yield (100 * score / maxScore).toInt
-
-  println(s"scores (%): ${ scorePercentages.mkString(", ") }")
-  // --> scores (%): 69, 9, 45, 3
+    for (score <- scores) yield {
+      val percentage = (100 * score / maxScore).toInt
+      s"${percentage}%"
+    }
+  println(s"scores: ${ scorePercentages.mkString(", ") }")
+  // --> scores: 69%, 9%, 45%, 3%
   ```
 
 * Iterating other multiple ranges.
@@ -172,7 +187,7 @@ You can use `for` comprehensions to iterate other one or multiple collections.
 
   ```scala
   // Compute a set of 3D vectors: (x, y, z), that have a given norm (length)
-  // using Euclidean norm formula: x^2 + y^2 + z^2 = norm^2
+  // using Euclidean norm formula: x^2 + y^2 + z^2 = norm^2.
 
   def spacialVectors(norm: Int, maxValue: Int = 10) =
     for {
@@ -212,14 +227,14 @@ It allows you to check if a value matches one of the defined patterns
 and runs the associated block of code.
 
 Pattern matching looks like an advanced version of C language's `switch-case`,
-or an alternative to long lists of `if`-`else` statements.
+or an alternative to long lists of `if-else` statements.
 
 ### Match values
 
 * A simple pattern matching example:
 
   ```scala
-  // Select an exit status message from an exit code.
+  // Print the message that matches an exit code.
 
   val code = 0
   val exitStatus = code match {
@@ -257,7 +272,7 @@ or an alternative to long lists of `if`-`else` statements.
 It is possible to match a value according to its type:
 
 ```scala
-// Print a description of different kinds of books.
+// Print comments about books.
 
 sealed abstract class Book
 case class Poem() extends Book
@@ -266,6 +281,7 @@ case class Dictionary() extends Book {
 }
 
 def getComments(book: Book): String = book match {
+  // matching `Book` instances according to their actual type
   case dict: Dictionary => s"a ${ dict.nbWords } words dictionary"
   case poem: Poem => s"just a book"
   // `case _` default pattern can be ignored thanks to the `sealed` modifier
@@ -280,8 +296,8 @@ println(getComments(Dictionary()))
 
 ### Match and unpack a `case class`
 
-Case classes are types (classes) that contains some attributes (values).
-It is possible to **access these attributes** through pattern matching:
+A [case class](classes#case-class) is a class that has attributes.
+These attributes can be **accessed through pattern matching**:
 
 ```scala
 // Display information about music artists.
@@ -324,15 +340,16 @@ Multiple patterns can be combined with `|` operator:
 // Tell if a number is in a defined interval.
 
 def tinyEvenNumber(x: Int): String = x match {
-  case 0 | 2 | 4 | 6 | 8 => "even number inside interval [0, 10["
+  // match multiple patterns
+  case 0 | 2 | 4 | 6 | 8 => "an even number inside the interval [0, 10["
   case _ => "other"
 }
 
-println(s"result is ${ tinyEvenNumber(4) }")
-// --> result is even number inside interval [0, 10[
+println(tinyEvenNumber(4))
+// --> an even number inside the interval [0, 10[
 
-println(s"result is ${ tinyEvenNumber(33) }")
-// --> result is other
+println(tinyEvenNumber(33))
+// --> other
 ```
 
 ### Pattern guards
@@ -365,13 +382,16 @@ def remove(item: FileSystemItem): Unit = {
   )
 }
 
-remove(File("file.txt"))
+val file = File("file.txt")
+remove(file)
 // --> file deleted
 
-remove(Dir("empty-dir", List()))
+val emptyDir = Dir("empty-dir", List())
+remove(emptyDir)
 // --> directory deleted
 
-remove(Dir("full-dir", List(File("file.txt")))
+val nonEmptyDir = Dir("full-dir", List(File("file.txt")))
+remove(nonEmptyDir)
 // --> it is not safe to delete this item
 ```
 
@@ -453,7 +473,7 @@ println(s"it is ${ calorimeter(34) }")
 // --> it is hot
 ```
 
-## Manage exceptions with `throw` and `try`-`catch`-`finally`
+## Manage exceptions with `throw` and `try-catch-finally`
 
 Here is how an **exception** can be thrown and handled in Scala:
 

@@ -7,26 +7,27 @@ Classes are templates for new objects.
 
 ## Available structures
 
-In Scala language there are several structures that are related to classes.
-The structures are **classes**, **traits**, **abstract classes**,
-**case classes** and **objects**.
+In Scala language there are several structures that look like classes.
+These structures are [class](#class), [trait](#trait),
+[abstract class](#abstract-class), [case class](#case-class) and
+[object](#object).
 
-The following table show the main features of each class-like structures:
+The following table shows the main features of each structure:
 
 | | init params | instantiable | extensible |
 --------------------------------- | - | - | -
 [class](#class)                   | ✔ | ✔ | ✔
-[trait](#trait)                   | ✘ | ✘ | ✔
-[abstract class](#abstract-class) | ✔ | ✘ | ✔
 [case class](#case-class)         | ✔ | ✔ | ✔
+[abstract class](#abstract-class) | ✔ | ✘ | ✔
+[trait](#trait)                   | ✘ | ✘ | ✔
 [object](#object)                 | ✘ | ✘ | ✘
 
 > **Additional features**:
 >
-> * [Objects](#object) are not types, they are type instances.
-> * You can create a class that extends as much [trait](#trait) as you want.
-> * But your new class can extend only one [class](#class),
->   [case class](#case-class) or [abstract class](#abstract-class)
+> * An [object](#object) is not a type, it is a **type instance**.
+> * A class can extend **only one** [class](#class), [case class](#case-class)
+>   or [abstract class](#abstract-class)
+> * But you can create a class that extends **multiple** [traits](#trait).
 
 ### Structure to use depending on the context
 
@@ -37,10 +38,10 @@ The goal | The structure to use
 --------------------------------- | - | - | -
 Create a **singleton** | use an [object](#object)
 Create instances that **store information** | use a [case class](#case-class)
-Create **instances** that share the same features | use a [class](#class)
+Create instances that share the **same features** | use a [class](#class)
 Create a base class for **related classes** | use an [abstract class](#abstract-class)
 Create a base class for **unrelated classes** | use a [trait](#trait)
-Not sure... | use a [trait](#trait) first then change later if necessary
+**Other**... | use a [trait](#trait) first then **change later** if necessary
 
 ## Class
 
@@ -67,8 +68,8 @@ Class instances can be created with initialization arguments.
     def fullUrl: String = s"$protocol://$location"
   }
 
-  // the extended class `HttpsUrl`, the initialization parameter are passed
-  // to the base class
+  // the extended class `HttpsUrl`:
+  // the initialization parameter are passed to the base class
   class HttpsUrl(override val location: String)
     extends BaseUrl("https", location)
 
