@@ -142,8 +142,8 @@ using underscore `_` symbol.
 The `_` is placed where a parameter of the function is used.
 That is called **currying**.
 
-Here is an example with the same function `divideByFour` function
-written **with** and **without** currying:
+Here is an example with a function `divideByFour` written **with**
+and **without** currying:
 
 ```scala
 // Divide a given number by four.
@@ -153,6 +153,12 @@ val divideByFourWithoutCurrying: Int => Int = (x) => x / 4
 
 // currying used to replace the parameter `x`
 val divideByFourWithCurrying: Int => Int = _ / 4
+
+val x = divideByFourWithoutCurrying(24)
+val y = divideByFourWithCurrying(24)
+
+println(s"${ if (x == y) "same value" else "different values" }")
+// --> same value
 ```
 
 ## Higher order functions
@@ -170,7 +176,7 @@ as a parameter, or returns a function as a return value.
   def beautify(value: String, beautifyer: String => String): String =
     s"pretty $value => ${beautifyer(value)}"
 
-  // define a classic function that will be sent to the higher order one
+  // define a plain function that will be sent to the higher order one
   def enclose(value: String): String = s"{ $value }"
 
   // ...
@@ -421,31 +427,4 @@ repeat(3) {
 // --> status: task ongoing...
 // --> status: task ongoing...
 // --> status: task ongoing...
-```
-
-## Definition annotations
-
-Scala annotations are statements starting with `@` symbol that associates
-information to an element definition.
-
-Scala API defines several annotations `@deprecated`, `@tailrec`, `@throws`,
-etc...
-To create new annotations it is recommended to implement them
-in **Java language**.
-
-```scala
-// Give π value.
-
-def π: Double = 3.1415
-
-// added `deprecated` decoration to the function,
-// to specify that the function is deprecated
-@deprecated("use π method", "version 2.0")
-def pi: Double = 3.14
-
-var radius = 5
-var circumference = 2 * pi * radius
-
-// run with -deprecation
-// --> warning: method pi is deprecated (since version 2.0): use π method
 ```

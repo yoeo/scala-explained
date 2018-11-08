@@ -424,7 +424,7 @@ using `String.r` method.
     }
   }
 
-  println(looksLike("please send me an e-mail to john@doe.com thanks"))
+  println(looksLike("please send an e-mail to john@doe.com thanks"))
   // --> email found: «john@doe.com»
 
   println(looksLike("my new phone number is: +226 50 32 12 33"))
@@ -435,7 +435,7 @@ using `String.r` method.
   a given regular expressions, using pattern matching:
 
   ```scala
-  // Check if a given text contains special characters (punctuation).
+  // Check if a text contains special characters (punctuation).
 
   def containsSpecialChars(text: String): Boolean = {
     val specialChars = raw"[^\w\s]+".r
@@ -489,8 +489,10 @@ try {
   // throw an exception
   throw CloudError("cannot connect to the cloud")
 } catch {
-  // catch the thrown exceptions
-  case CloudError(message) => println(s"error caught: $message")
+  // catch `CloudError` exception
+  case CloudError(message) => println(s"cloud error: $message")
+  // catch other errors
+  case _ : Throwable => println("error: something happened")
 } finally {
   // run this code whether an exception has been caught or not
   println("cloud computations done")
@@ -498,7 +500,7 @@ try {
 
 /* -->
 running computations on the cloud
-error caught: cannot connect to the cloud
+cloud error: cannot connect to the cloud
 cloud computations done
 */
 ```
@@ -509,26 +511,29 @@ cloud computations done
 The imported names are then available in the current name scope:
 
 ```scala
+// Import names from packages.
+
 // import all names defined in `scala.sys` package
 import scala.sys._
 
 // import `Pi` value
 import scala.math.Pi
 
-// import several functions: `sin` and `cos`, `cos` function is renamed
+// import two functions: `sin` and `cos`,
+// `cos` function is renamed `cosinus`
 import scala.math.{sin, cos => cosinus}
 
-// import all but `tan` function (`tan` name is "erased")
+// import all names but `tan`, `tan` name is dropped
 import scala.math.{tan => _, _}
 ```
 
 ## `lazy` values
 
-`lazy` values are values that are evaluated when they are used for
-the **first time**. If a `lazy` is never used it will not be evaluated:
+A `lazy` value is a value that is evaluated when it is used for
+the **first time**. If a `lazy` value is never used it will not be evaluated:
 
 ```scala
-// A system that waters your plants for you.
+// A system that waters plants.
 
 // this block will be evaluated when `humidity` will be used
 lazy val humidity = {
@@ -538,7 +543,7 @@ lazy val humidity = {
 
 println("prepare the watering of the plants")
 
-// evaluate the block above to retrieve `humidity` value
+// implicitly evaluate the block above to retrieve `humidity` value
 if (humidity < 50)
   println("watering the plants")
 else
@@ -549,4 +554,30 @@ prepare the watering of the plants
 retrieving humidity from sensors
 watering the plants
 */
+```
+
+## Definition annotations
+
+A Scala annotation is a statement that starts with `@` symbol.
+It associates information with an element definition.
+
+Scala API defines several annotations `@deprecated`, `@tailrec`, `@throws`,
+etc...
+To create new annotations it is recommended to implement them
+in **Java language**.
+
+```scala
+// Give π value.
+
+val π: Double = 3.1415
+
+// `deprecated` annotation specifies that the value is deprecated
+@deprecated("use π method", "version 2.0")
+val pi: Double = 3.14
+
+var radius = 5
+var circumference = 2 * pi * radius
+
+// run with -deprecation
+// --> warning: method pi is deprecated (since version 2.0): use π method
 ```
