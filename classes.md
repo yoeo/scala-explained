@@ -58,7 +58,43 @@ Class instances can be created with initialization arguments.
   val item = new Empty
   ```
 
-* Define a class can extend an other class:
+* Create a class that has initialization **parameters**:
+
+  ```scala
+  // Display information about tomato.
+
+  // the class that contains information about tomato:
+  // `fresh` is implicitly defined as a `private value` here it cannot be
+  // accessed from outside of the class nor modified inside the class.
+  // While `price` is defined as a public variable and can be used from
+  // outside of the class
+  class Tomato(fresh: Boolean, var price: Double = 1) {
+
+    // a member of the class
+    def inflatePrice(multiplier: Int): Unit =
+      price *= multiplier
+
+    // text shown when an instance of the class is printed
+    override def toString: String = fresh match {
+      case true => s"fresh tomato at €$price per kilo"
+      case false => s"rotten tomato at €$price per kilo"
+    }
+  }
+
+  // create an instance
+  val tomato = new Tomato(true, 1.5)
+
+  println(s"tomato current price is €${ tomato.price }")
+  // --> tomato current price is €1.5
+
+  // run the instance's method `inflatePrice`
+  tomato.inflatePrice(2)
+
+  println(tomato)
+  // --> fresh tomato at €3.0 per kilo
+  ```
+
+* Define a class **extends** an other class:
 
   ```scala
   // Format URL values.
@@ -80,42 +116,9 @@ Class instances can be created with initialization arguments.
   // --> https://www.example.com
   ```
 
-* Create a class that has attributes:
-
-  ```scala
-  // Display information about tomato.
-
-  // the class that contains everything about tomato
-  class Tomato(fresh: Boolean, var price: Double = 1) {
-    // `fresh` is implicitly defined as a `private value` here
-    // it cannot be accessed from outside of the class
-    // nor modified inside the class
-
-    def inflatePrice(multiplier: Int): Unit =
-      price *= multiplier
-
-    override def toString: String = fresh match {
-      case true => s"fresh tomato at €$price per kilo"
-      case false => s"rotten tomato at €$price per kilo"
-    }
-  }
-
-  // create an instance
-  val tomato = new Tomato(true, 1.5)
-
-  println(s"tomato current price is €${ tomato.price }")
-  // --> tomato current price is €1.5
-
-  // run the instance's method `inflatePrice`
-  tomato.inflatePrice(2)
-
-  println(tomato)
-  // --> fresh tomato at €3.0 per kilo
-  ```
-
 ### Attribute modifiers: `private` and `protected`
 
-Class attribute visibility can be tuned using **attributes modifiers**:
+Class attribute visibility can be tuned using **attribute modifiers**:
 
 * `private`: the attribute can only be used in the
   **class where it is defined**.
@@ -161,7 +164,15 @@ println(botJournalist.writeArticle)
 ### Class member access control: getter and setter
 
 To control the access to a private class member,
-Scala supports the following syntax:
+two methods must be defined:
+
+A **getter method** that has the name of the member, example:
+* `def member: Type = ...`
+
+A **setter method** that has the name of the member followed by `_=`, example:
+* `def member_= (x: Type): Unit = ...`
+
+Full example:
 
 ```scala
 // Display the high scores of a game.
@@ -211,15 +222,20 @@ Classes has a member named `this` that is bound to the current object.
 // `TextHolder` default constructor takes a `String` parameter
 class TextHolder(val text: String) {
 
-  // an alternative constructor that calls the default constructor
+  // a second constructor that calls the default constructor
   def this(base: String, repeat: Int) = this(base * repeat)
 
-  // an other constructor that calls the first alternative one
+  // a third constructor that calls the second one
   def this() = this("A", 3)
 }
 
+// use the third constructor
 val a = new TextHolder
+
+// use the second constructor
 val b = new TextHolder("A", 3)
+
+// use the default constructor
 val c = new TextHolder("AAA")
 
 val allSame = (a.text == b.text && b.text == c.text)
@@ -228,7 +244,7 @@ println(s"${ if (allSame) "same" else "not same"} value")
 // --> same value
 ```
 
-### Calling super class attributes `super`
+### Calling super class attributes: `super`
 
 `super` keyword gives access to the members of the super classes:
 
@@ -249,8 +265,8 @@ class SimpleConverter extends Converter {
 
 val converter = new SimpleConverter
 
-println(s"a 40″ TV as a diagonal >= ${ converter.inchToMeters(40) } m")
-// --> a 40″ TV as a diagonal >= 1.0 m
+println(s"a 40″ TV as a diagonal ~= ${ converter.inchToMeters(40) } m")
+// --> a 40″ TV as a diagonal ~= 1.0 m
 ```
 
 ### Class modifiers: `final` and `sealed`
@@ -282,6 +298,7 @@ println(s"a 40″ TV as a diagonal >= ${ converter.inchToMeters(40) } m")
   }
 
   // all the existing escape plans are defined here, in this file
+
   class PlanA extends EscapePlan {
     override def exit: String = "roof"
   }
@@ -300,18 +317,19 @@ println(s"a 40″ TV as a diagonal >= ${ converter.inchToMeters(40) } m")
 
 ### Callable instance and assignment expansion: `apply` and `update`
 
-A `class` will produce callable instance if it has a member named `apply`:
-* `instance(...)` is the same as `instance.apply(...)`
+A `class` will produce callable instances if it has a member named `apply`:
+* `instance(x)` ⟺ `instance.apply(x)`
 
 A value can be assigned to a `class` instance call if the `class` has
 a member named `update`. This is known as **assignment expansion**:
-* `instance(...) = value` is the same as `instance.update(value, ...)`
+* `instance(x) = y` ⟺ `instance.update(x, y)`
 
 Example:
 
 ```scala
 // Work with a two-dimension matrix.
 
+// using a mutable map to be able to change the matrix content
 import scala.collection.mutable.{Map => MutMap}
 
 class Matrix(x: Int, y: Int) {
@@ -357,6 +375,153 @@ println(s"matrix[10, 10] = $valueAtPositionTen")
 // --> matrix[10, 10] = 0
 ```
 
+## Case class
+
+A `case class` is a [class](#class) created primary to store data.
+`case class` instances have the following features:
+1. They support **pattern matching**.
+1. They can be **compared** with each other instances `a == b`,
+1. They produce a **readable message** when printed, ex: `Point(1,2)`.
+
+Examples of `case class`.
+
+* Defining an empty `case class`:
+
+  ```scala
+  // an empty case class: parenthesis required
+  case class Empty()
+
+  // case class instantiation: no `new` keyword
+  val item = Empty
+  ```
+
+* Creating a `case class` with some attributes and default values:
+
+  ```scala
+  // View buildings information.
+
+  // a case class with 2 attributes
+  case class Building(nbFloors: Int, builtIn: String = "1950")
+
+  val smallOldBuilding = Building(3)
+
+  println(s"This building was built in ${ smallOldBuilding.builtIn }")
+  // --> This building was built in 1950
+  ```
+
+* Compare `case class` instances:
+
+  While [class](#class) instances are **compared by reference**:
+  *instances are the same when they refer to the same location in the memory*,
+  `case class` instances are **compared by structure**:
+  *instances are the same when all their attributes have the same value*.
+
+  ```scala
+  // Check if it is hot for real.
+
+  case class Temperature(celcius: Int)
+
+  val hot = Temperature(45)
+  val notCold = Temperature(45)
+
+  // compare two instances: different references
+  // but same structure `celcius=45`
+  val same = hot == notCold
+
+  println(s"${ if (same) "really" else "possible" } hot weather")
+  // --> really hot weather
+  ```
+
+### Copy and modify an instance: `copy`
+
+`case class` instances have a built-in method `copy` that
+creates a **copy of the instance**.
+
+The new instance attributes values can be set through the `copy` method.
+
+```scala
+// Sell fruits.
+
+case class Fruit(name: String, price: Double)
+
+// the original instance
+val mango = Fruit("mango", 1)
+
+// the copy, `price` attribute is modified
+val expensiveMango = mango.copy(price = 10)
+
+println(s"this ${ expensiveMango.name } costs ${ expensiveMango.price } €")
+// --> this mango costs 10.0 €
+```
+
+### Extract instance parameters
+
+`case class` allows the extraction of instance parameters:
+
+```scala
+// Describe a vacation place.
+
+case class VacationPlace(landscape: String, ratings: Int)
+
+val location = VacationPlace("heavenly beach", 5)
+
+// extracting `location` instance parameters into `place` and `stars` values
+val VacationPlace(place, stars) = location
+
+println(s"Going to a $stars stars $place.")
+// --> Going to a 5 stars heavenly beach.
+```
+
+### Other features: `productPrefix`, `productIterator`, etc...
+
+`case class` instances expose the following methods:
+
+* `instance.productPrefix`: get the `case class` name.
+* `instance.productArity`: get the number of parameters of the `case class`.
+* `instance.productIterator`: returns an iterator through the
+  `case class` parameters.
+* `instance.productElement(index)`: retrieve a parameter value
+  from its position.
+
+Example:
+
+```scala
+// Get info about a movie.
+
+case class Movie(title: String, budget: Double, rating: Int)
+
+val blockBuster = Movie("Triple-W 4 The Prequel", 500e6, 7)
+
+// retrieve the number of fields
+val nbFields = blockBuster.productArity
+
+// get the `case class` name
+val className = blockBuster.productPrefix
+
+println(s"$className has $nbFields fields")
+// --> Movie has 3 fields
+
+// retrieve an instance parameter value
+val rating = blockBuster.productElement(2)
+
+println(s"$className rating is $rating/10")
+// --> Movie rating is 7/10
+
+// iterate through instance parameters
+val fields = for (field <- blockBuster.productIterator) yield s"- $field"
+
+println(s"""
+  Full $className info:
+  ${ fields.mkString("\n  ") }
+""")
+/* -->
+  Full Movie info:
+  - Triple-W 4 The Prequel
+  - 5.0E8
+  - 7
+*/
+```
+
 ## Abstract class
 
 An `abstract class` is a class that **cannot be instantiated**
@@ -373,7 +538,7 @@ one abstract class.
   class Empty extends EmptyAbstract
   ```
 
-* An abstract class with initialization parameters:
+* An abstract class with **initialization parameters**:
 
   ```scala
   // Calculate the probability of winning.
@@ -397,9 +562,9 @@ one abstract class.
 ## Trait
 
 A `trait` is a structure close to a class that **cannot be instantiated**
-and therefore, has no initialization parameters.
+and therefore has no initialization parameters.
 
-A [class](#class) can **extend** one or several `traits`.
+A [class](#class) can **extend** several `traits`.
 
 * Creating an empty trait:
 
@@ -514,11 +679,13 @@ println(wall.fullSpecs(16))
 ### Stackable trait pattern: `abstract override`
 
 Stackable trait pattern is a programming pattern where a functionality
-is split into multiple components (traits) then assembled by extending a class.
+is **split into multiple components** then assembled using **multiple
+inheritance**.
 
 With `abstract override` it is possible to partially define a method
-in a trait, the rest of the implementation is executed through its super class
-using `super.parentMethod(...)`.
+in a `trait`.
+The actual method is implemented by an other `trait` and executed through
+`super.parentMethod(...)`.
 
 This feature is used to implement the stackable trait pattern:
 
@@ -578,146 +745,6 @@ val instance = new Greet {
 
 println(instance.greetings)
 // --> Greetings to the world!
-```
-
-## Case class
-
-A `case class` is a [class](#class) created primary to store data.
-`case class` instances have the following features:
-1. They support pattern matching.
-1. They can be compared with each other instances `a == b`,
-1. They produce a readable message when printed, ex: `Point(1,2)`.
-  
-* Defining an empty `case class`:
-
-  ```scala
-  // an empty case class
-  case class Empty() // parenthesis required
-
-  // case class instantiation
-  val item = Empty // no `new` keyword
-  ```
-
-* Creating a `case class` with multiple attributes and default values:
-
-  ```scala
-  // View buildings information.
-
-  // a case class with 2 attributes
-  case class Building(nbFloors: Int, builtIn: String = "1950")
-
-  val smallOldBuilding = Building(3)
-
-  println(s"This building was built in ${ smallOldBuilding.builtIn }")
-  // --> This building was built in 1950
-  ```
-
-* Compare `case class` instances:
-
-  While [class](#class) instances are compared **by reference**
-  (the compared instances are at the same location in the memory),
-  `case class` instances are compared **by structure**
-  (all the attributes are the same).
-
-  ```scala
-  // Check if it's really hot.
- 
-  case class Temperature(celcius: Int)
-
-  val hot = Temperature(45)
-  val notCold = Temperature(45)
-
-  // compare two instances: different references
-  // but same structure `celcius=45`
-  val same = hot == notCold
-
-  println(s"${ if (same) "really" else "possible" } hot weather")
-  // --> really hot weather
-  ```
-
-### Copy and modify an instance: `copy`
-
-Case `case class` instances have a built-in method `copy` that
-creates a **copy of the instance**.
-
-The new instance attributes values can be modified through the `copy` method.
-
-```scala
-// Sell fruits.
-
-case class Fruit(name: String, price: Double)
-
-// the original instance
-val mango = Fruit("mango", 1)
-
-// the copy, `price` attribute is modified
-val expensiveMango = mango.copy(price = 10)
-
-println(s"this ${ expensiveMango.name } costs ${ expensiveMango.price } €")
-// --> this mango costs 10.0 €
-```
-
-### Extract instance parameters
-
-`case class` allows the extraction of instance parameters:
-
-```scala
-case class VacationPlace(landscape: String, ratings: Int)
-
-val location = VacationPlace("heavenly beach", 5)
-
-// extracting `location` instance parameters into `place` and `stars` values
-val VacationPlace(place, stars) = location
-
-println(s"Going to a $stars stars $place.")
-// --> Going to a 5 stars heavenly beach.
-```
-
-### Other features: `productPrefix`, `productIterator`, etc...
-
-`case class` instances expose the following methods:
-
-* `instance.productPrefix`: get the `case class` name.
-* `instance.productArity`: get the number of parameters of the `case class`.
-* `instance.productIterator`: get an iterator through `case class` name.
-* `instance.productElement(index)`: retrieve a parameter value
-  from its position.
-
-Example:
-
-```scala
-case class Movie(title: String, budget: Double, rating: Int)
-
-val blockBuster = Movie("Triple-W 4 The Prequel", 500e6, 7)
-
-// retrieve the number of fields
-val nbFields = blockBuster.productArity
-
-// get the `case class` name
-val className = blockBuster.productPrefix
-
-println(s"$className has $nbFields fields")
-// --> Movie has 3 fields
-
-// retrieve an instance parameter value
-val rating = blockBuster.productElement(2)
-
-println(s"$className rating is $rating/10")
-// --> Movie rating is 7/10
-
-// iterate through instance parameters
-val fields = for (field <- blockBuster.productIterator) yield s"- $field"
-
-println(s"""
-  Full $className info:
-  ${ fields.mkString("\n  ") }
-""")
-/* -->
-  Full Movie info:
-  - Triple-W 4 The Prequel
-  - 5.0E8
-  - 7
-*/
 ```
 
 ## Object
@@ -851,7 +878,7 @@ of the class.
 * Companion `object` as a [class](#class) instance factory:
 
   ```scala
-  // Generate customer entries.
+  // Handle customers.
 
   // companion class
   case class Customer(id: Long)
@@ -870,25 +897,24 @@ of the class.
   // generate an instance
   val consumerOne = Customer.next
 
-  println(s"Please enter customer ${ consumerOne.id }")
-  // --> Please enter customer 1
+  println(s"Please welcome customer ${ consumerOne.id }")
+  // --> Please welcome customer 1
 
   // generate an other instance
   val consumerTwo = Customer.next
 
-  println(s"Please enter customer ${ consumerTwo.id }")
-  // --> Please enter customer 2
+  println(s"Please welcome customer ${ consumerTwo.id }")
+  // --> Please welcome customer 2
   ```
 
 ### Extractor object: `apply` and `unapply`
 
-With the extractor `object` feature it is possible to **call an `object`**
-and **extract values from an `object`**:
-* `Object(value)` is the same as `Object.apply(value)`
-* `val Object(value) = other` is the same as
-  `val value = Object.unapply(other)`
+With the extractor `object` feature it is possible to **call** an `object`
+and **extract values** from an `object`:
+* `Object(x)` ⟺ `Object.apply(x)`
+* `val Object(x) = y` ⟺ `val x = Object.unapply(y)`
 
-This mechanism is used with pattern matching.
+This mechanism is used with **pattern matching**.
 
 * Simple extractor `object`:
 
@@ -919,7 +945,7 @@ This mechanism is used with pattern matching.
 * Using an extractor `object` with pattern matching:
 
   ```scala
-  // Serialize and recover messages.
+  // Serialize and recover a message.
 
   // an extractor object 
   object Serialize {
@@ -981,7 +1007,7 @@ There are several ways to combine classes.
 
 ### Outer and inner classes: `instance.Inner` and `Outer#Inner`
 
-An **inner class** is a [class](#class) defined inside other classes.
+An **inner class** is a [class](#class) defined inside an other class.
 The enclosing class is called **outer class**.
 
 * **Each instance** of the outer class has its own version of the inner class:
@@ -1016,7 +1042,8 @@ The enclosing class is called **outer class**.
   // --> risks.critical_errors
   ```
 
-* Outer class instances that **share the same inner class**:
+* You can use a **common type** for inner class instances.
+  This type is **not bound to an outer class instance**:
 
   ```scala
   // Stream data.
@@ -1027,11 +1054,12 @@ The enclosing class is called **outer class**.
     // the inner class
     class Chunk(val content: String)
 
-    // `Stream#Chunk` is the "absolute" type name of the inner class
-    // that is not related to an instance
+    // `Stream#Chunk` is a type for inner class instances
+    // this type is not related to an outer class instance
     def receive: Stream#Chunk = new Chunk("keep-alive")
 
-    def send(chunk: Stream#Chunk): Unit = println(s"sent: ${ chunk.content }")
+    def send(chunk: Stream#Chunk): Unit =
+      println(s"sent: ${ chunk.content }")
   }
 
   val inputStream: Stream = new Stream
@@ -1114,15 +1142,15 @@ if `TypeY < TypeX` then `(TypeY with TypeZ) < (TypeX with TypeZ)`
   // --> This is very clean.
   ```
 
-### Self-type mix-in: `this: TypeA =>`
+### Self-type mix-in: `this: Type =>`
 
 **self-type mix-in** is a syntax used to inject the members of a class
 into an other class.
 
 The instantiation of the resulting type must conform to the `self-type`:
 
-If `ClassA` is mixed into `ClassB` then `ClassB` cannot be instantiated.
-`ClassB with ClassA` should be instantiated instead.
+* If `ClassA` is mixed into `ClassB` then `ClassB` cannot be instantiated.
+  `ClassB with ClassA` should be instantiated instead.
 
 ```scala
 // Get information about a place.
@@ -1155,7 +1183,7 @@ println(reco.describe)
 
 ## Generic class
 
-A **generic class** is a [class](#class) that takes type parameters.
+A **generic class** is a [class](#class) that takes **type parameters**.
 Generic classes produces an actual class when the type parameter
 is replaced by an actual type.
 
@@ -1217,10 +1245,10 @@ The variance of the type `T` defines the relation between
 
 * If `T` is **invariant** then `Generic[Parent]` has no special relation
   with `Generic[Child]`. 
-* If `T` is **covarient** then the subtyping relation is kept,
-  `Child < Parent` => `Generic[Child] < Generic[Parent]`.
-* If `T` is **contravariant** then the subtyping relation is reversed
-  `Child < Parent` => `Generic[Parent] < Generic[Child]`.
+* If `T` is **covarient** then the subtyping relation is kept:
+  * `Child < Parent` ⟹ `Generic[Child] < Generic[Parent]`.
+* If `T` is **contravariant** then the subtyping relation is reversed:
+  * `Child < Parent` ⟹ `Generic[Parent] < Generic[Child]`.
 
 By default Scala type variables are **invariant**.
 A **covariant** type variable is defined by adding `+` symbol
@@ -1282,7 +1310,7 @@ by adding `-` symbol to its name, ex: `-T`.
 ### Type upper and lower bounds: `T <: Upper` and `T >: Lower`
 
 Optional **upper** and **lower bounds** define which types can be applied
-to the generic class.
+to a generic class.
 
 * **Upper bound**:
 
@@ -1472,7 +1500,7 @@ class Datagram(
   // set the type that matches `T` in `Header` and `Payload` traits
   type T = Int
 
-  // set the type that matches `R` in `Extract` traits
+  // set the type that matches `R` in `Extract` trait
   type R = String
 
   def extract: String = f"|header=$header%02x|payload=$payload%04x|"
@@ -1522,13 +1550,14 @@ from the place where they are implicitly used.
 * An example of **implicit conversion**:
 
   ```scala
-  // Compute modulo operation.
+  // Compute modulo operations.
 
   case class ModuloNumber(value: Int, modulus: Int)
 
   // define an operation that will implicitly convert
   // `ModuloNumber` instances to `Int` instances
-  implicit def toInt(modulo: ModuloNumber): Int = modulo.value % modulo.modulus
+  implicit def toInt(modulo: ModuloNumber): Int =
+    modulo.value % modulo.modulus
 
   val modulo: ModuloNumber = ModuloNumber(16, 3)
 
@@ -1546,7 +1575,8 @@ from the place where they are implicitly used.
 
   object Travel {
     // a method that takes an implicit value `to`
-    def details[A](from: A)(implicit to: A): String = s"travel from $from to $to"
+    def details[A](from: A)(implicit to: A): String =
+      s"travel from $from to $to"
   }
 
   // implicit values
@@ -1575,26 +1605,24 @@ from the place where they are implicitly used.
   ```scala
   // Compute the median value.
 
-  // a function that implicitly take a parameter `strategy` and
-  // `strategy` is also a function
-  def median[A](items: List[A])(implicit strategy: List[A] => A): A =
-    strategy(items)
+  // a higher order function that implicitly take a parameter `pick`
+  // that is also a function
+  def median[A](items: List[A])(implicit pick: (List[A], Int) => A): A = {
+    val index = (items.length / 2).toInt
+    pick(items, index)
+  }
 
   // an implicit candidate for `A = Int`
-  implicit val numberMean = (items: List[Int]) => {
-    val index = (items.length / 2).toInt
-    items.sorted.apply(index)
-  }
+  implicit val pickNumber: (List[Int], Int) => Int =
+    (items, index) => items.sorted.apply(index)
 
   // an implicit candidate for `A = String`
-  implicit val textMean = (items: List[String]) => {
-    val index = (items.length / 2).toInt
-    items.sortBy(_.length).apply(index)
-  }
+  implicit val pickText: (List[String], Int) => String =
+    (items, index) => items.sortBy(_.length).apply(index)
 
   val cities = List("Gao", "Tamanrasset", "Antananarivo", "Koupela", "Lome")
 
-  // implicitly adds the argument `textMean` because here `A = String`
+  // implicitly adds the argument `pickText` because here `A = String`
   val medianCity = median(cities)
 
   println(s"please visit $medianCity")
@@ -1602,7 +1630,7 @@ from the place where they are implicitly used.
 
   val temperatures = List(30, 27, 45, 26, 18)
 
-  // implicitly adds the argument `numberMean` because here `A = Int`
+  // implicitly adds the argument `pickNumber` because here `A = Int`
   val medianTemperature = median(temperatures)
 
   println(s"it's $medianTemperature degrees there")
@@ -1611,16 +1639,14 @@ from the place where they are implicitly used.
 
 ## Operators overload
 
-* `operators overload`: operators are class methods that can be overloaded.
 
-**Operators** are **functions** that represented by **symbols**
-and use the **infix notation**.
-
-For example `x + y` is the infix notation of `x.+(y)`.
+**Operators** are **functions**. They are represented by **symbols**
+and use the **infix notation**. For example:
+* `x + y` is the infix notation of the function `x.+(y)`.
 
 Operators features:
 * Operators can be **overloaded** like any function.
-* Commutative operators can be implemented using an **an implicit class**.
+* Commutative operators can be implemented using an **implicit class**.
 * **Unary** operator are defined using the prefix `unary_`
 
 Example:
@@ -1650,15 +1676,16 @@ case class Point(val x: Int = 0, val y: Int = 0) {
 }
 
 // implement commutative operations for + and -:
-//    by using an implicit conversion to extend `Int` values
-//    to `IntExtendedForPoint`, a class that support operations with `Point`
+//    by using an implicit conversion
+//    to extend `Int` values to `IntExtendedForPoint`,
+//    a class that support operations with `Point`
 implicit class IntExtendedForPoint(val x: Int) {
 
   // operator: `Int + Point`
   def +(point: Point): Point = point + x
 
   // operator: `Int - Point`
-  def -(point: Point): Point = point - x
+  def -(point: Point): Point = -point + x
 }
 
 val a = Point(1, 2)
