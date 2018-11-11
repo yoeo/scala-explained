@@ -174,14 +174,14 @@ as a parameter, or returns a function as a return value.
   // define a higher order function `beautify`,
   // its parameter `beautifyer` is a function
   def beautify(value: String, beautifyer: String => String): String =
-    s"pretty $value => ${beautifyer(value)}"
+    s"pretty $value => ${ beautifyer(value) }"
 
   // define a plain function that will be sent to the higher order one
   def enclose(value: String): String = s"{ $value }"
 
   // ...
 
-  // calling `beautify` with `enclose` function as argument
+  // calling `beautify` with `enclose` function as an argument
   val prettyCat = beautify("cat", enclose)
 
   println(prettyCat)
@@ -234,8 +234,8 @@ as a parameter, or returns a function as a return value.
 Scala API proposes a large set of higher order functions
 for various uses.
 
-For example the `map` function of collection object applies a given function
-to all the element inside the collection and returns a new collection
+For example the `map` method of a collection instance applies a given function
+to all the elements inside the collection and returns a new collection
 that contains the result of the operation:
 
 ```scala
@@ -271,7 +271,7 @@ This allows syntactic shortcuts like partial parameter application.
   // --> 60
   ```
 
-* One of Scala API functions that has multiple parameter lists `foldLeft`:
+* A Scala API functions that has multiple parameter lists `foldLeft`:
 
   ```scala
   // Compute root mean of a list of values.
@@ -305,7 +305,7 @@ This allows syntactic shortcuts like partial parameter application.
 
 ### Partial functions
 
-It is easy to create partial functions from a multiple parameter list function
+It is easy to create partial functions from a multiple parameter lists function
 using currying or type conversion.
 
 * a partial function created with **currying**:
@@ -354,7 +354,7 @@ using currying or type conversion.
 ## Functions with a variable number of parameters
 
 Functions with a variable number of parameters can be defined by adding `*`
-after type of the parameter that will be repeated.
+after the type of the parameter that will be repeated.
 These function are sometimes called **variadic functions**.
 
 It is also possible to send a **list of values as arguments** to
@@ -373,8 +373,10 @@ prettyPrint("download started", "downloading", "failed")
 // --> downloading
 // --> failed
 
+val states = List("restarted", "finished")
+
 // call `prettyPrint` by expanding an arguments list
-prettyPrint(List("restarted", "finished"): _*)
+prettyPrint(states: _*)
 // --> restarted
 // --> finished
 ```

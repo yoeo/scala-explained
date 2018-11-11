@@ -14,12 +14,12 @@ These structures are [class](#class), [trait](#trait),
 
 The following table shows the main features of each structure:
 
-| | init params | instantiable | extensible |
+| |  extensible |init params | instantiable |
 --------------------------------- | - | - | -
 [class](#class)                   | ✔ | ✔ | ✔
 [case class](#case-class)         | ✔ | ✔ | ✔
-[abstract class](#abstract-class) | ✔ | ✘ | ✔
-[trait](#trait)                   | ✘ | ✘ | ✔
+[abstract class](#abstract-class) | ✔ | ✔ | ✘
+[trait](#trait)                   | ✔ | ✘ | ✘
 [object](#object)                 | ✘ | ✘ | ✘
 
 > **Additional features**:
@@ -721,7 +721,7 @@ database.store(5, "prices")
 // --> stored 5 in sql://prices
 ```
 
-### Instantiate a trait using an anonymous class `new Trait { ... }`
+### Instantiate an anonymous class `new Trait { ... }`
 
 An instance can be created from a trait by **fully defining all its member**.
 To define these members you can create an anonymous class
@@ -1637,7 +1637,7 @@ from the place where they are implicitly used.
   // --> it's 27 degrees there
   ```
 
-## Operators overload
+## Operator overloading
 
 
 **Operators** are **functions**. They are represented by **symbols**
