@@ -120,7 +120,7 @@ Different number types are defined for different usages:
   with **better precision**. Example: `9.0123`
 
 Number representations are explained in depth in the
-[literals section](literals).
+[literals section](literals.md).
 
 Number values supports the following operations:
 * **arithmetical** operations:

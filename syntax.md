@@ -4,7 +4,7 @@ This section explains Scala language basic structures like:
 **values**, *variables*, *blocks*, *loops*, **pattern matching**,
 *exceptions handling*, **lazy values**, etc...
 
-Scala [functions](functions) and [classes](classes)
+Scala [functions](functions.md) and [classes](classes.md)
 are explained in their own sections.
 
 * TOC
@@ -57,8 +57,8 @@ comment */
   ```
 
 > * Variable and values should **always be initialized**,
->   unless they are defined in an [abstract class](classes#abstract-class)
->   or a [trait](classes#trait).
+>   unless they are defined in an [abstract class](classes.md#abstract-class)
+>   or a [trait](classes.md#trait).
 > * Moreover [values should be preferred to variables](https://twitter.com/odersky/status/58200881082011648).
 
 ### Explicit and implicit typing
@@ -296,7 +296,7 @@ println(getComments(Dictionary()))
 
 ### Match and unpack a `case class`
 
-A [case class](classes#case-class) is a class that has attributes.
+A [case class](classes.md#case-class) is a class that has attributes.
 These attributes can be **accessed through pattern matching**:
 
 ```scala

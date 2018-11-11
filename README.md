@@ -47,15 +47,15 @@ Scala programming tools:
 
 ## Start!
 
-First of all, we will talk about [Scala basic syntax](syntax).
+First of all, we will talk about [Scala basic syntax](syntax.md).
 
 If you are already familiar with Scala, you can learn more about
-[Scala cool functional programming (FP) features here](functions).
+[Scala cool functional programming (FP) features here](functions.md).
 
 If you want to build beautiful software architectures,
-you can take a look at [Scala mind blowing object concepts](classes).
+you can take a look at [Scala mind blowing object concepts](classes.md).
 
 For the most curious among you, there is also an exhaustive list of
-Scala [keywords](keywords) and [symbols](symbols) with plenty of examples.
+Scala [keywords](keywords.md) and [symbols](symbols.md) with plenty of examples.
 
 Enjoy.
