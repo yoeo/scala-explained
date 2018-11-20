@@ -14,20 +14,21 @@ These structures are [class](#class), [trait](#trait),
 
 The following table shows the main features of each structure:
 
-| |  extensible |init params | instantiable |
---------------------------------- | - | - | -
-[class](#class)                   | ✔ | ✔ | ✔
-[case class](#case-class)         | ✔ | ✔ | ✔
-[abstract class](#abstract-class) | ✔ | ✔ | ✘
-[trait](#trait)                   | ✔ | ✘ | ✘
-[object](#object)                 | ✘ | ✘ | ✘
+| | can extend | can be extended | has init. params. | can be instantiated | compare instances by structure |
+--------------------------------- | - | - | - | - | -
+[class](#class)                   | ✔ | ✔ | ✔ | ✔ | ✘
+[case class](#case-class)         | ✔ | ✔ | ✔ | ✔ | ✔
+[abstract class](#abstract-class) | ✔ | ✔ | ✔ | ✘ | ✘
+[trait](#trait)                   | ✔ | ✔ | ✘ | ✘ | ✘
+[object](#object)                 | ✔ | ✘ | ✘ | ✘ | ✘
 
 > **Additional features**:
 >
 > * An [object](#object) is not a type, it is a **type instance**.
-> * A class can extend **only one** [class](#class), [case class](#case-class)
+> * You cannot create a class that directly **extends more than one**
+>   [class](#class), [case class](#case-class)
 >   or [abstract class](#abstract-class)
-> * But you can create a class that extends **multiple** [traits](#trait).
+> * But you can create a class that **extends many** [traits](#trait).
 
 ### Structure to use depending on the context
 
@@ -58,7 +59,7 @@ Class instances can be created with initialization arguments.
   val item = new Empty
   ```
 
-* Create a class that has initialization **parameters**:
+* Create a class that has **members**:
 
   ```scala
   // Display information about tomato.
@@ -94,7 +95,7 @@ Class instances can be created with initialization arguments.
   // --> fresh tomato at €3.0 per kilo
   ```
 
-* Define a class **extends** an other class:
+* Define a class that **extends** an other class:
 
   ```scala
   // Format URL values.
@@ -118,7 +119,7 @@ Class instances can be created with initialization arguments.
 
 ### Attribute modifiers: `private` and `protected`
 
-Class attribute visibility can be tuned using **attribute modifiers**:
+A class attribute visibility can be tuned using an **attribute modifier**:
 
 * `private`: the attribute can only be used in the
   **class where it is defined**.
@@ -155,7 +156,7 @@ println(botJournalist.writeArticle)
 // --> This is good news ── a Robot (today)
 ```
 
-> The class initialization **attributes visibility** can also be set:
+> The class **initialization parameters visibility** can also be set:
 > * `class ClassName(val x: Int)`: the attribute is **public**.
 > * `class ClassName(protected val x: Int)`: the attribute is **protected**.
 > * `class ClassName(private val x: Int)`: the attribute is **private**.
@@ -213,13 +214,13 @@ println(s"New high score is $actualHighScore")
 
 ### Define multiple class constructors: `this`
 
-Classes has a member named `this` that is bound to the current object.
-`this` member is also used to define constructors:
+Classes has a member named `this` that is bound to the **current instance**.
+`this` member is also used to define **constructors**:
 
 ```scala
 // Store some text.
 
-// `TextHolder` default constructor takes a `String` parameter
+// `TextHolder` default constructor. It takes a `String` parameter
 class TextHolder(val text: String) {
 
   // a second constructor that calls the default constructor
@@ -244,12 +245,12 @@ println(s"${ if (allSame) "same" else "not same"} value")
 // --> same value
 ```
 
-### Calling super class attributes: `super`
+### Calling super classes' members: `super`
 
-`super` keyword gives access to the members of the super classes:
+`super` keyword gives access to the members of the **super classes**:
 
 ```scala
-// Convert inches to metres.
+// Convert inches to meters.
 
 // base class
 class Converter {
@@ -259,14 +260,14 @@ class Converter {
 // derived class
 class SimpleConverter extends Converter {
   override def inchToMeters(x: Double): Double =
-    // `inchToMeters` method from the base class is called through `super`
+    // the base class's `inchToMeters` method is called through `super`
     super.inchToMeters(x).round
 }
 
 val converter = new SimpleConverter
 
-println(s"a 40″ TV as a diagonal ~= ${ converter.inchToMeters(40) } m")
-// --> a 40″ TV as a diagonal ~= 1.0 m
+println(s"a 40″ TV as a diagonal ~= ${ converter.inchToMeters(40) }m")
+// --> a 40″ TV as a diagonal ~= 1.0m
 ```
 
 ### Class modifiers: `final` and `sealed`
@@ -317,17 +318,17 @@ println(s"a 40″ TV as a diagonal ~= ${ converter.inchToMeters(40) } m")
 
 ### Callable instance and assignment expansion: `apply` and `update`
 
-A `class` will produce callable instances if it has a member named `apply`:
+A `class` will produce callable instances if it has a method named `apply`:
 * `instance(x)` ⟺ `instance.apply(x)`
 
 A value can be assigned to a `class` instance call if the `class` has
-a member named `update`. This is known as **assignment expansion**:
+a method named `update`. This is known as **assignment expansion**:
 * `instance(x) = y` ⟺ `instance.update(x, y)`
 
 Example:
 
 ```scala
-// Work with a two-dimension matrix.
+// Work with a two-dimensional matrix.
 
 // using a mutable map to be able to change the matrix content
 import scala.collection.mutable.{Map => MutMap}
@@ -347,16 +348,16 @@ class Matrix(x: Int, y: Int) {
     if (checkBounds(i, j)) map.update((i, j), newValue)
 }
 
-// create a matrix with bounds 0 <= x <= 4 and 0 <= y <= 4
+// create a matrix with bounds: i ∈ [0, 4[ and j ∈ [0, 4[
 val matrix = new Matrix(4, 4)
 
-// implicitly call `apply` to retrieve the value
+// implicitly call `apply` to retrieve the value at i = 1 and j = 1
 val valueAtPositionOne = matrix(1, 1)
 
 println(s"matrix[1, 1] = $valueAtPositionOne")
 // --> matrix[1, 1] = 0
 
-// implicitly call `update` to update the value
+// implicitly call `update` to modify the value at i = 2 and j = 2
 matrix(2, 2) = 4
 
 // retrieve the updated value
@@ -380,7 +381,7 @@ println(s"matrix[10, 10] = $valueAtPositionTen")
 A `case class` is a [class](#class) created primary to store data.
 `case class` instances have the following features:
 1. They support **pattern matching**.
-1. They can be **compared** with each other instances `a == b`,
+1. They can be **compared** with each other `a == b`,
 1. They produce a **readable message** when printed, ex: `Point(1,2)`.
 
 Examples of `case class`.
@@ -412,9 +413,9 @@ Examples of `case class`.
 * Compare `case class` instances:
 
   While [class](#class) instances are **compared by reference**:
-  *instances are the same when they refer to the same location in the memory*,
+  *instances are equal when they refer to the same location in the memory*,
   `case class` instances are **compared by structure**:
-  *instances are the same when all their attributes have the same value*.
+  *instances are equal when all their attributes have the same value*.
 
   ```scala
   // Check if it is hot for real.
@@ -434,7 +435,7 @@ Examples of `case class`.
 
 ### Copy and modify an instance: `copy`
 
-`case class` instances have a built-in method `copy` that
+A `case class` instance has a built-in method `copy` that
 creates a **copy of the instance**.
 
 The new instance attributes values can be set through the `copy` method.
@@ -450,8 +451,8 @@ val mango = Fruit("mango", 1)
 // the copy, `price` attribute is modified
 val expensiveMango = mango.copy(price = 10)
 
-println(s"this ${ expensiveMango.name } costs ${ expensiveMango.price } €")
-// --> this mango costs 10.0 €
+println(s"this ${ expensiveMango.name } costs €${ expensiveMango.price }")
+// --> this mango costs €10.0
 ```
 
 ### Extract instance parameters
@@ -561,8 +562,8 @@ one abstract class.
 
 ## Trait
 
-A `trait` is a structure close to a class that **cannot be instantiated**
-and therefore has no initialization parameters.
+A `trait` is a structure close to a class that **cannot be instantiated**.
+In addition to that, traits **doesn't have initialization parameters**.
 
 A [class](#class) can **extend** several `traits`.
 
@@ -626,7 +627,7 @@ A [class](#class) can **extend** several `traits`.
   // `Box` trait represents all its specialized classes
   val boxes = Map[String, Box](
     "red box" -> new ColoredBox("red", 0),
-    "top bouncing box" -> new BouncingBox(18, 12)
+    "bouncing box" -> new BouncingBox(18, 12)
   )
 
   boxes.foreach {
@@ -636,7 +637,7 @@ A [class](#class) can **extend** several `traits`.
   }
   /* -->
   a small red box
-  a big top bouncing box
+  a big bouncing box
   */
   ```
 
@@ -659,12 +660,12 @@ trait Screen {
 
 // a class that fully defines `specs` method
 class LcdMonitor(val monitorType: String) extends Screen {
-  def specs = s"$monitorType monitor"
+  def specs = s"${ monitorType }-display"
 }
 
 // a trait with a method that uses `specs`. It will be mixed-in `LcdMonitor`
 trait ScreenWall extends Screen {
-  def fullSpecs(nbScreens: Int) = s"Wall made with $nbScreens $specs"
+  def fullSpecs(nbScreens: Int) = s"Wall made of $nbScreens ${ specs }s"
 }
 
 // generate a new class by mixing the two structures above
@@ -673,7 +674,7 @@ class HighResLcdWall extends LcdMonitor("4K") with ScreenWall
 val wall = new HighResLcdWall
 
 println(wall.fullSpecs(16))
-// --> Wall made with 16 4K monitor
+// --> Wall made of 16 4K-displays
 ```
 
 ### Stackable trait pattern: `abstract override`
@@ -697,6 +698,7 @@ trait Engine {
 }
 
 trait SQLEngine extends Engine {
+
   /** Modifies the `dataset` parameter then calls an unknown implementation
     * of the method.
     */
@@ -705,6 +707,7 @@ trait SQLEngine extends Engine {
 }
 
 trait Database extends Engine {
+
   /** This is the implementation that is called by the `abstract override`
     * variant of this method.
     */
@@ -723,7 +726,7 @@ database.store(5, "prices")
 
 ### Instantiate an anonymous class `new Trait { ... }`
 
-An instance can be created from a trait by **fully defining all its member**.
+An instance can be created from a trait by **fully defining all its members**.
 To define these members you can create an anonymous class
 that extends the trait.
 
@@ -777,6 +780,26 @@ Unlike [classes](#class), objects are not types and cannot be instantiated.
   // --> Database server port is 3306
   ```
 
+  * An `object` that extends a [trait](#trait):
+
+  ```scala
+  // Manage a shared resource.
+
+  trait SharedResource {
+      def acquire = println("lock resource")
+      def release = println("unlock resource")
+  }
+
+  // create the singleton
+  object Storage extends SharedResource
+
+  Storage.acquire
+  // --> lock resource
+
+  Storage.release
+  // --> unlock resource
+  ```
+
 ### The `main` method
 
 Scala program entry point is a method named `main`
@@ -801,8 +824,8 @@ object SuperFastSoftware {
 
 ### Importing object members
 
-An `object` **member can be imported** in an other file
-or an other execution context using the following syntax:
+An `object`'s **member can be imported** in an other file
+or an other namespace using the following syntax:
 `import packagename.ObjectName.objectMember`
 
 That is demonstrated in the example bellow.
@@ -972,7 +995,7 @@ The `private[this]` modifier is used to create an object members
 that is only visible inside the object and cannot be used by a companion class:
 
 ```scala
-// Store a secret key, protected by a password.
+// Store a secret key, protected by a passphrase.
 
 // this class cannot directly access the object private `key` member
 // of its companion object
@@ -984,7 +1007,7 @@ object KeyStore {
   // only visible inside the object
   private[this] val key = 123456789L
 
-  def getKey(keyPass: String): Option[Long] = keyPass match {
+  def getKey(passPhrase: String): Option[Long] = passPhrase match {
     case "azerty" => Some(key)
     case _ => None
   }
@@ -998,7 +1021,7 @@ println(s"the secret key is $secretKey")
 ```
 
 > `protected[this] ...` defines a member that is only visible
-> in the current class and its derived classes.
+> in the **current class** and its **derived classes**.
 > The companion object cannot access it.
 
 ## Combined classes
@@ -1043,7 +1066,7 @@ The enclosing class is called **outer class**.
   ```
 
 * You can use a **common type** for inner class instances.
-  This type is **not bound to an outer class instance**:
+  This type is **not bound to any outer class instance**:
 
   ```scala
   // Stream data.
