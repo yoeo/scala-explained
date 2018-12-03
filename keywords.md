@@ -11,19 +11,35 @@ The uses cases and explanations are mostly taken from the
 
 There are currently **40 reserved keywords in Scala** language:
 
-| | | | | | |
-|-|-|-|-|-|-|
-| [abstract](#abstract) | [case](#case) | [catch](#catch) | [class](#class) | [def](#def) | [do](#do) |
-| [else](#else) | [extends](#extends) | [false](#false) | [final](#final) | [finally](#finally) | [for](#for) |
-| [forSome](#forSome) | [if](#if) | [implicit](#implicit) | [import](#import) | [lazy](#lazy) | [macro](#macro) |
-| [match](#match) | [new](#new) | [null](#null) | [object](#object) | [override](#override) | [package](#package) |
-| [private](#private) | [protected](#protected) | [return](#return) | [sealed](#sealed) | [super](#super) | [this](#this) |
-| [throw](#throw) | [trait](#trait) | [try](#try) | [true](#true) | [type](#type) | [val](#val) |
-| [var](#var) | [while](#while) | [with](#with) | [yield](#yield) | | | |
+| | | | | |
+|-|-|-|-|-|
+| [abstract](#abstract) | [case](#case) | [catch](#catch) | [class](#class) | [def](#def)
+| [do](#do) | [else](#else) | [extends](#extends) | [false](#false) | [final](#final)
+| [finally](#finally) | [for](#for) | [forSome](#forSome) | [if](#if) | [implicit](#implicit)
+| [import](#import) | [lazy](#lazy) | [macro](#macro) | [match](#match) | [new](#new)
+| [null](#null) | [object](#object) | [override](#override) | [package](#package) | [private](#private)
+| [protected](#protected) | [return](#return) | [sealed](#sealed) | [super](#super) | [this](#this)
+| [throw](#throw) | [trait](#trait) | [try](#try) | [true](#true) | [type](#type)
+| [val](#val) | [var](#var) | [while](#while) | [with](#with) | [yield](#yield)
 
 Let's explain them all!
 
 ## 40 Scala keywords explained:
+
+#### abstract
+
+```scala
+abstract class ClassName
+```
+* defines a class with incomplete members. Abstract classes features:
+  1. they can take initialization parameters,
+  1. they cannot be instantiated.
+```scala
+abstract override def traitMethod = { ... }
+```
+* defines [traits](#trait) methods that calls unrelated
+  [super](#super) methods. In short, it allows the usage of the
+  [stackable trait pattern](https://www.artima.com/scalazine/articles/stackable_trait_pattern.html).
 
 #### abstract
 
