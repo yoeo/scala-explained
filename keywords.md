@@ -29,16 +29,16 @@ Let's explain them all!
 ```scala
 abstract class ClassName
 ```
-* defines a class with incomplete members. Abstract classes features:
+defines a class with incomplete members. Abstract classes features:
   1. they can take initialization parameters,
   1. they cannot be instantiated.
 
 ```scala
 abstract override def traitMethod = { ... }
 ```
-* defines [traits](#trait) methods that calls unrelated
-  [super](#super) methods. In short, it allows the usage of the
-  [stackable trait pattern](https://www.artima.com/scalazine/articles/stackable_trait_pattern.html).
+defines [traits](#trait) methods that calls unrelated
+[super](#super) methods. In short, it allows the usage of the
+[stackable trait pattern](https://www.artima.com/scalazine/articles/stackable_trait_pattern.html).
 
 ## abstract
 
