@@ -724,6 +724,9 @@ database.store(5, "prices")
 // --> stored 5 in sql://prices
 ```
 
+More about the stackable trait pattern on
+[https://www.artima.com/scalazine/articles/stackable_trait_pattern.html](https://www.artima.com/scalazine/articles/stackable_trait_pattern.html).
+
 ### Instantiate an anonymous class `new Trait { ... }`
 
 An instance can be created from a trait by **fully defining all its members**.
