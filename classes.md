@@ -970,7 +970,7 @@ This mechanism is used with **pattern matching**.
   ```scala
   // Serialize and recover a message.
 
-  // an extractor object 
+  // an extractor object
   object Serialize {
     def apply(value: String) = s"<$value>"
     def unapply(serialized: String): Option[String] = {
@@ -1077,8 +1077,8 @@ The enclosing class is called **outer class**.
     // the inner class
     class Chunk(val content: String)
 
-    // `Stream#Chunk` is a type for inner class instances
-    // this type is not related to an outer class instance
+    // `Stream#Chunk` is a common type for inner class instances
+    // this type is not bound to any outer class instance
     def receive: Stream#Chunk = new Chunk("keep-alive")
 
     def send(chunk: Stream#Chunk): Unit =
@@ -1096,14 +1096,14 @@ The enclosing class is called **outer class**.
 
 ### Compound types: `TypeA with TypeB`
 
-A **compound type** is a type created by the composition of multiple types:
+A **compound type** can be created by the composing multiple types:
 `TypeA with TypeB with TypeC with...`
 
 A compound type can be **instantiated** even if its components are
 [traits](#trait) and [abstract classes](#abstract-class) as long as
-they are fully defined.
+they are **fully defined**.
 
-The **compound type** reproduces the subtyping relations of
+The compound type reproduces the **subtyping relations** of
 the component classes. In other words:
 
 if `TypeY < TypeX` then `(TypeY with TypeZ) < (TypeX with TypeZ)`
@@ -1191,7 +1191,7 @@ trait Reputation {
   def describe: String = s"$name at $location has $stars stars"
 }
 
-// Extend both classes here to satisfy the mix-in requirement:
+// Extend both classes here to satisfy the self-type requirement:
 // `Reputation with Place`
 class Recommendation(
   val name: String,
@@ -1220,7 +1220,7 @@ is replaced by an actual type.
     def decorate: String = s"~{ $value }~"
   }
 
-  // instantiate the class by replacing explicitly `T` by `Long`
+  // instantiate the class by replacing explicitly `T` by `Int`
   val decoratedNumber = Decorator[Int](1000)
 
   println(decoratedNumber.decorate)
@@ -1263,11 +1263,11 @@ is replaced by an actual type.
 
 Let's take two types `Parent` and `Child` that have a subtyping relation
 `Child < Parent` and a generic class `Generic[T]`.
-The variance of the type `T` defines the relation between
+**The variance** of the type `T` defines the relation between
 `Generic[Parent]` and `Generic[Child]`:
 
 * If `T` is **invariant** then `Generic[Parent]` has no special relation
-  with `Generic[Child]`. 
+  with `Generic[Child]`.
 * If `T` is **covarient** then the subtyping relation is kept:
   * `Child < Parent` ⟹ `Generic[Child] < Generic[Parent]`.
 * If `T` is **contravariant** then the subtyping relation is reversed:
@@ -1288,17 +1288,21 @@ by adding `-` symbol to its name, ex: `-T`.
   case class Embed[+T](value: T)
 
   // `Any` is the subtype of any Scala type
-  // `Embed[Any]` is then the base type of any `Embed[T]`
+  // `Embed[Any]` is then the subtype of any `Embed[T]`
   def show(embedded: Embed[Any]): Unit =
     println(s"embedded value: ${ embedded.value }")
 
   val embeddedMessage = new Embed[String]("secret")
 
+  // `Embed[String]` value is implicitly converted to `Embed[Any]`
+  // thanks to the covariance of the type variable `T`
   show(embeddedMessage)
   // --> embedded value: secret
 
   val embeddedNumber = new Embed(147)
 
+  // `Embed[Int]` value is also implicitly converted to `Embed[Any]`
+  // thanks to the covariance of the type variable `T`
   show(embeddedNumber)
   // --> embedded value: 147
   ```
@@ -1363,8 +1367,8 @@ to a generic class.
     }
   }
 
-  val roomInfo = new RoomInfo[LivingRoom]
   val room = new LivingRoom
+  val roomInfo = new RoomInfo[LivingRoom]
   val brightness = roomInfo.getBrightness(room)
 
   println(s"the room is $brightness")
@@ -1489,10 +1493,10 @@ println(s"result is $compareCharValues")
 
 An **abstract type** is a type alias defined inside a [class](#class)
 an [abstract class](#abstract-class) or a [trait](trait).
-The type that matches this alias is defined in the **sub classes**.
+The type that matches this alias is defined in the **derived classes**.
 
 Constraints like upper are lower bounds can be applied to abstract types.
-Therefore, abstract types can be used to reduce the number type parameters
+Therefore, abstract types can be used to reduce the number of type parameters
 defined in a [generic class](#generic-class).
 
 ```scala
@@ -1549,7 +1553,8 @@ Existential types might generate **obscure type errors** if not used properly
 ```scala
 // Count items that doesn't have the same types.
 
-// enable the controlled feature => feature to avoid when possible!
+// the `import` here enables the existential types feature
+// => this feature should be avoided in most cases!
 import scala.language.existentials
 
 // define an existantial type `A forSome { type A }`
@@ -1701,7 +1706,7 @@ case class Point(val x: Int = 0, val y: Int = 0) {
 // implement commutative operations for + and -:
 //    by using an implicit conversion
 //    to extend `Int` values to `IntExtendedForPoint`,
-//    a class that support operations with `Point`
+//    a class that supports operations with `Point`
 implicit class IntExtendedForPoint(val x: Int) {
 
   // operator: `Int + Point`
