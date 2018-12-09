@@ -418,10 +418,10 @@ override val classMember = 2
   that have been previously defined in a parent class.
 
 ```scala
-abstract override traitMethod = {...}
+abstract override def traitMethod = ...
 ```
 
-* Defines an [abstract method](#abstract) in a [traits](#trait).
+* Override an [abstract method](#abstract) in a [traits](#trait).
 
 ## package
 
@@ -541,24 +541,30 @@ this.classMember
   of the [class](#class).
 
 ```scala
-class ClassName {this: InjectedClassName => ... }
+class ClassName {
+  this: InjectedClassName =>
+  ...
+}
 ```
 
 * Injects a class members into an other class.
-  This mechanism is called **self typing**.
+  This mechanism is called [self-type](classes.md#self-type-mix-in-this-type-).
 
 ```scala
 def this(param: Int) = this(param, 2L, ...)
 ```
 
-* Defines a **constructor** with other parameter types.
+* Defines an
+  [alternative constructor](#classes.md#define-multiple-class-constructors-this)
+  for the current class.
 
 ```scala
 private[this] val classMember = 2
 ```
 
-* Defines an **object protected** member.
-  This member is only visible in the current class.
+* Defines an
+  [object protected](classes.md#object-protected-members-privatethis-protectedthis)
+  member. This member is only visible in the current class.
   The companion class or companion object cannot access it.
 
 ```scala
@@ -574,8 +580,7 @@ protected[this] val classMember = 2
 throw new ErrorClass(message)
 ```
 
-* Throws an error.
-  The error should be handled by a [try-catch](#try) block.
+* Throws an error. The error should be handled by a [try-catch](#try) block.
 
 ## trait
 
@@ -583,10 +588,8 @@ throw new ErrorClass(message)
 trait TraitName { ... }
 ```
 
-* Defines an incomplete [class](#class) called `trait`.
-  Traits features:
-  1. cannot take initialization parameters,
-  1. cannot be instantiated.
+* Defines a [trait](classes.md#trait).
+  A `trait` is a [class](classes.md#class) that cannot be instantiated.
 
 ## try
 
@@ -613,10 +616,10 @@ val x: Boolean = true
 ## type
 
 ```scala
-type T = Int
+type T
 ```
 
-* Defines an alias for a type.
+* Defines an [abstract type](classes.md#abstract-types).
 
 ## val
 
@@ -624,7 +627,8 @@ type T = Int
 val x = 1
 ```
 
-* Defines an identifier whose content **cannot be modified**.
+* Defines a [value](syntax.md#values--variables),
+  an identifier that cannot be reassigned to an other value.
 
 ## var
 
@@ -632,7 +636,8 @@ val x = 1
 var x = 2
 ```
 
-* Defines an identifier whose content **can be modified**.
+* Defines a [variable](syntax.md#values--variables),
+  an identifier that can be reassigned to other values.
 
 ## while
 
@@ -642,7 +647,7 @@ do {
 } while (...)
 ```
 
-* Starts a [do-while](#do) loop.
+* Starts a [do-while loop](syntax.md#while-and-do-while-loops).
   Loops until the `while` condition is [false](#false).
 
 ```scala
@@ -651,7 +656,7 @@ while (...) {
 }
 ```
 
-* Starts a `while` loop.
+* Starts a [while loop](syntax.md#while-and-do-while-loops).
   Loops until the `while` condition is [false](#false).
 
 ## with
@@ -667,9 +672,9 @@ class ClassName extends Base1 with Trait1 with Trait2
 val x = new ClassName with Trait1 with Trait2
 ```
 
-* Creates an instance
-  by combining multiple types ([class](#class) & [traits](#trait))
-  to generate a new type.
+* Instantiate an
+  [anonymous class](classes.md#instantiate-an-anonymous-class-new-trait---)
+  by combining multiple types ([class](#class) & [traits](#trait)).
 
 ## yield
 
@@ -677,5 +682,5 @@ val x = new ClassName with Trait1 with Trait2
 for (x <- items) yield ...
 ```
 
-* Defines a [for generator](#for).
+* Defines a [for comprehension](syntax.md#for-comprehensions).
   The generator produces a composite value (List, Array, etc...).
