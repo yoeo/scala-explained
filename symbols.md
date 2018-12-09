@@ -29,28 +29,28 @@ There are currently **20 reserved symbols in Scala** language:
 x match { case CaseClassName(_, _) => 33 }
 ```
 
-* here `_` is a placeholder
+> here `_` is a placeholder
   for unused parameters. An other example: `x match { case _ => 0 }`.
 
 ```scala
 import packagename._
 ```
 
-* imports every accessible identifier
+> imports every accessible identifier
   that is in the package.
 
 ```scala
 import packagename.{name => _, _}
 ```
 
-* imports everything but `name`.
+> imports everything but `name`.
 
 
 ```scala
 val functionName:Type1 => Type2 = (_.toType2)
 ```
 
-* curried form of a function
+> curried form of a function
   definition. Same as `val functionName:Type1 => Type2 = (x) => x.toType2`.
   The curried form can also be used for function calls,
   example: `List(1, 2, 3).map(_ + 2) // --> List(3, 4, 5)`.
@@ -59,40 +59,40 @@ val functionName:Type1 => Type2 = (_.toType2)
 val x = tupleName._1
 ```
 
-* accesses the first element of a tuple.
+> accesses the first element of a tuple.
 
 ```scala
 val functionName = method(_, _, _)
 ```
 
-* creates a new function
+> creates a new function
   from an existing one using currying.
 
 ```scala
 var x: Type = _
 ```
 
-* creates a variable that contains an empty value.
+> creates a variable that contains an empty value.
 
 ```scala
 methodName(argList:_*)
 ```
 
-* expands the parameters when calling a method
+> expands the parameters when calling a method
   that has a variable number of parameters.
 
 ```scala
 def unary_- = 0 - this.x
 ```
 
-* defines the unary operator `-x`
+> defines the unary operator `-x`
   for a class instances.
 
 ```scala
 def methodName(param: GenericType[_])...
 ```
 
-* defines a method that takes
+> defines a method that takes
   a parameter that has a generic **existential type**.
   `_` here is a placeholder for any type.
 
@@ -100,7 +100,7 @@ def methodName(param: GenericType[_])...
 def member_= ...
 ```
 
-* is part of the definition of a private class member
+> is part of the definition of a private class member
   getter and setter. Full example:
 
   ```scala
@@ -121,19 +121,19 @@ def member_= ...
 val name: Type = ...
 ```
 
-* defines the type of an identifier.
+> defines the type of an identifier.
 
 ```scala
 (x: @unchecked) match { case _ => ... }
 ```
 
-* annotates an expression.
+> annotates an expression.
 
 ```scala
 methodName(argList:_*)
 ```
 
-* expands the parameters when calling a method
+> expands the parameters when calling a method
   that has a variable number of parameters.
 
 ## equals sign `=`
@@ -143,19 +143,19 @@ methodName(argList:_*)
 val x = 5
 ```
 
-* creates an identifier with a given value.
+> creates an identifier with a given value.
 
 ```scala
 varName = 5
 ```
 
-* assigns a new value to an existing variable.
+> assigns a new value to an existing variable.
 
 ```scala
 var x: Type = _
 ```
 
-* creates a variable that contains an empty value.
+> creates a variable that contains an empty value.
   According to the variable's type, the empty value will be:
   `0`, `false`, `Unit` or `null`.
 
