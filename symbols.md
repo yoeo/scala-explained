@@ -23,9 +23,7 @@ There are currently **20 reserved symbols in Scala** language:
 | [`[ ]`](#brackets--) | [`{ }`](#curly-brackets--) | [`//`, `/* */`](#comment-signs---) | [`"`, `"""`](#double-quotes--) |
 | [`'`](#single-quotes-) | [`` ` ``](#back-quotes-) | [`,`](#comma-) | [`;`](#semicolon-) |
 
-## 20 Scala symbols explained:
-
-#### underscore `_`
+## underscore `_`
 
 ```scala
 x match { case CaseClassName(_, _) => 33 }
@@ -116,7 +114,7 @@ def member_= ...
   }
   ```
 
-#### colon `:`
+## colon `:`
 
 
 ```scala
@@ -138,7 +136,7 @@ methodName(argList:_*)
 * expands the parameters when calling a method
   that has a variable number of parameters.
 
-#### equals sign `=`
+## equals sign `=`
 
 
 ```scala
@@ -194,7 +192,7 @@ type name = Type
 
 * defines an alias for a type.
 
-#### rightward double arrow `=>`, `⇒`
+## rightward double arrow `=>`, `⇒`
 
 
 ```scala
@@ -235,7 +233,7 @@ x match { case _: => 0 }
 
 * defines a pattern matching alternative.
 
-#### leftward arrow `<-`, `←`
+## leftward arrow `<-`, `←`
 
 
 ```scala
@@ -244,7 +242,7 @@ for (x <- itemList) { ... }
 
 * defines the for-comprehensions loop current item.
 
-#### less than percent `<%`
+## less than percent `<%`
 
 
 ```scala
@@ -256,7 +254,7 @@ def methodName[TypeAlias <% Converter[TypeAlias]](param: TypeAlias) ...
   This notation called
   [view bounds is deprecated!](https://github.com/scala/scala/pull/2909)
 
-#### less than colon `<:`
+## less than colon `<:`
 
 
 ```scala
@@ -266,7 +264,7 @@ type TypeAlias <: SuperType
 * defines an alias for types
   that are sub classes of the **upper bound** `SuperType`.
 
-#### more than colon `>:`
+## more than colon `>:`
 
 
 ```scala
@@ -276,7 +274,7 @@ type TypeAlias >: SubType
 * defines an alias for types
   that are super classes of the **lower bound** `SubType`.
 
-#### hashtag `#`
+## hashtag `#`
 
 
 ```scala
@@ -287,7 +285,7 @@ val x OuterType#InnerType
   The variable type `InnerType` is defined inside an other type `OuterType`.
   This notation is called **type projection**.
 
-#### at `@`
+## at `@`
 
 
 ```scala
@@ -305,7 +303,7 @@ x match { case a@(1 | 2) => a + 1 }
   with `x` value, when `x` matches the pattern `(1 | 2)`.
   This notation is called **pattern binder**.
 
-#### star `*`
+## star `*`
 
 
 ```scala
@@ -329,7 +327,7 @@ x match { case CaseClassName(a, _*) => a + 1 }
 * extracts the specified
   parameters of a `case class` during pattern matching.
 
-#### parenthesis `( )`
+## parenthesis `( )`
 
 
 ```scala
@@ -383,7 +381,7 @@ for (x <- items) ...
 
 * groups a block of expressions.
 
-#### brackets `[ ]`
+## brackets `[ ]`
 
 
 ```scala
@@ -407,7 +405,7 @@ private[this] val classMember = 3
 * defines an **object protected** member.
   `protected` values with special restrictions can also be defined this way.
 
-#### curly brackets `{ }`
+## curly brackets `{ }`
 
 
 ```scala
@@ -466,7 +464,7 @@ type T = A forSome { type A }
 * defines an alias for an existential type.
   [Existential types should be avoided when possible.](https://github.com/scala/scala/blob/25d596e52a6b4bfea5ab2e62e98854e273c5abe4/src/library/scala/language.scala#L136)
 
-#### comment signs `//`, `/* */`
+## comment signs `//`, `/* */`
 
 
 ```scala
@@ -484,7 +482,7 @@ type T = A forSome { type A }
 
   is a multi-lines comment.
 
-#### double quotes `"`, `"""`
+## double quotes `"`, `"""`
 
 
 ```scala
@@ -501,7 +499,7 @@ val x = "text"
   """
   ```
 
-#### single quotes `'`
+## single quotes `'`
 
 
 ```scala
@@ -518,7 +516,7 @@ val x = 'symbolValue
   Strings that  are only used for the code logic can be replaced by symbols:
   `Map` keys for example.
 
-#### back quotes `` ` ``
+## back quotes `` ` ``
 
 
 ```scala
@@ -528,7 +526,7 @@ val `reservedKeywords` = 2
 * allows the usage of reserved keywords
   as an identifier. Example ``val `case` = 1``.
 
-#### comma `,`
+## comma `,`
 
 
 ```scala
@@ -563,7 +561,7 @@ import packagename.{Name1, Name2, ...}
 
 * imports multiple identifiers.
 
-#### semicolon `;`
+## semicolon `;`
 
 
 ```scala
